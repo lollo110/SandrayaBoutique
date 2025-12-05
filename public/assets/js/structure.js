@@ -9,7 +9,7 @@ let showPanier = document.querySelector(".showPanier");
 omino.addEventListener("click", function (e) {
     e.stopPropagation();
 
-    showPanier.classList.remove("active");
+    showPanier.classList.remove("active2");
 
     show.classList.toggle("active");
 });
@@ -51,6 +51,7 @@ function updateSlide() {
     const width = container.querySelector(".exa").clientWidth;
     container.style.transform = `translateX(-${indexImages * width}px)`;
     container.style.transition = "2s ease";
+    container.style.zIndex = " -1";
 }
 
 if (left && right) {
