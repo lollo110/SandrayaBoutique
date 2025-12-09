@@ -44,6 +44,9 @@ class Commandes
     public function __construct()
     {
         $this->detailsCommandes = new ArrayCollection();
+
+        $this->date_commande = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+    
     }
 
     public function getId(): ?int
@@ -56,11 +59,10 @@ class Commandes
         return $this->date_commande;
     }
 
-    public function setDateCommande(\DateTime $date_commande): static
+    public function setDateCommande(\DateTime $date_commande): void
     {
-        $this->date_commande = $date_commande;
+        $this->date_commande = new \DateTime();
 
-        return $this;
     }
 
     public function getTotal(): ?float

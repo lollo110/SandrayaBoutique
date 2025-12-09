@@ -23,6 +23,7 @@ body {
     text-align: center;
     position: relative;
     margin-top: 2%;
+    z-index: -1;
 }
 .titre :nth-child(3) {
     position: absolute;
@@ -89,8 +90,7 @@ body {
     top: 5vh;
     background-color: #ccb089;
     padding: 20px;
-    z-index: 1001;
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 0 20px;
     opacity: 0;
     transform: translateY(-20px);
     pointer-events: none;
@@ -104,15 +104,16 @@ body {
     position: fixed;
     right: 0;
     top: 5vh;
-    background-color: #ccb089;
+    background-color: #fff;
+    box-shadow: -5px 5px 10px #e79ebd;
     padding: 20px;
     z-index: 2005;
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 0 20px;
     opacity: 0;
     transform: translateX(30px);
     pointer-events: none;
     width: 20%;
-    height: 50vh;
+    height: 80vh;
     font-size: 1.2em;
     text-align: end;
 
@@ -164,11 +165,14 @@ footer {
     background-color: #ccb089;
     padding-top: 20px;
     width: 100%;
+    position: relative;
+    z-index: 0;
 }
 .footer {
     display: flex;
     justify-content: space-between;
-    text-align: center;
+    text-align: center; 
+    margin: 0 2%;   
 }
 
 .footer div {
@@ -216,6 +220,11 @@ footer p {
 
 .footer-little img{
     width: 80%;
+}
+
+.hide{
+    position: relative;
+    z-index: 1;
 }
 /* Formulaire registration */
 
@@ -302,13 +311,55 @@ form button:hover {
 .freccia2,
 .freccia3,
 .freccia4 {
-    z-index: 1001;
     cursor: pointer;
     font-size: 1.25em;
     margin: 0 10px;
+    z-index: 2001;
 }
 
 /* Page produit */
+
+.produitBanner{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5%;
+    position: relative;
+    z-index: -1;
+}
+
+.littleBanner{
+    width: 50%;
+    transition: all 2s ease-in-out;
+    opacity: 0;
+    
+}
+
+.littleBanner:first-child{
+    transform: translateX(110%);
+}
+
+.littleBanner:last-child{
+    transform: translateX(-110%);
+}
+
+.produitBanner.visible .littleBanner{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.littleBanner img{
+    width: 75%;
+    margin: auto;
+}
+
+.littleBanner p{
+    width: 50%;
+    margin: auto;
+}
+
+
 .collection {
     display: flex;
     align-items: center;
@@ -316,7 +367,7 @@ form button:hover {
     overflow: hidden;
     height: 60vh;
     position: relative;
-    z-index: -1;
+    z-index: 1;
 }
 .carte-container {
     display: flex;
@@ -335,10 +386,6 @@ form button:hover {
 
 }
 
-.carte:hover .img{
-    transform: scale(1.2);
-}
-
 .cornice {
     position: absolute;
     bottom: -5%;
@@ -349,17 +396,54 @@ form button:hover {
     z-index: 1000;
 }
 
-.carte p {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1001;
-}
-.carte img:nth-child(2) {
+.produitImage {
     width: 60%;
     height: 40vh;
     border-radius: 20px;
     box-shadow: 1px 1px 20px #e79ebd;
     border: solid 3px #ffffff;
+}
+.carte h3{
+    position: absolute;
+    bottom: 9%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    font-size: 0.9em;
+    width: 230px;
+}
+
+
+/* DetailProduit */
+
+.sin img{
+    width: 100%;
+    height: 50vh;
+}
+
+.contain {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+    gap: 2%;
+}
+
+.sin{
+    width: 30%;
+    text-align: right;
+}
+.dest{
+    width: 50%;
+}
+
+.imgPicco{
+    display: flex;
+    justify-content: space-between;
+    gap: 2%;
+}
+
+.imgPicco img{
+    height: 10vh;
+
 }

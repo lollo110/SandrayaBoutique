@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DetailProduitController!
+{% endblock %}
+
+{% block body %}
+    <div class="contain">
+        <div class="sin">
+            
+            <div class="imgGrand">
+                {% set image_principal = produit.produitsImages|first %}
+                {% if image_principal %}
+                    <img src="{{ asset('assets/uploads/' ~ image_principal.image) }}" 
+                         alt="{{ produit.nomProd }} (Image principale)" /> 
+                {% else %}
+                    <img src="{{ asset('assets/uploads/placeholder.png') }}" alt="Aucune image"/>
+                {% endif %}
+            </div>
+            
+           
+            <div class="imgPicco">
+                {% for produitImage in produit.produitsImages %}
+                    <img src="{{ asset('assets/uploads/' ~ produitImage.image) }}" 
+                         alt="Miniature {{ loop.index }}"
+                         />
+                {% endfor %}
+            </div>
+            
+        </div>
+        
+        <div class="dest">
+            <div class="description">
+                <h2>{{ produit.nomProd }}</h2>
+                <p>Prix : **{{ produit.prix }} €**</p>
+            </div>
+            <div class="description">
+                <h3>Description détaillée :</h3>
+                <p>{{ produit.description|raw }}</p> 
+            </div>
+            {# Ajoutez ici le bouton d'ajout au panier, la gestion du stock, etc. #}
+        </div>
+    </div>
+{% endblock %}

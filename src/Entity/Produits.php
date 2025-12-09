@@ -52,6 +52,9 @@ class Produits
     #[ORM\OneToMany(targetEntity: Favoris::class, mappedBy: 'produit')]
     private Collection $favoris;
 
+    #[ORM\Column(length: 255, nullable: false)]
+    private ?string $category = null;
+
     public function __construct()
     {
         $this->detailsCommandes = new ArrayCollection();
@@ -234,6 +237,18 @@ class Produits
                 $favori->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?string $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }

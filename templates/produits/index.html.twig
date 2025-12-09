@@ -5,33 +5,50 @@
 
 {% block body %}
 	<h1>Produits</h1>
+
+	<div class="produitBanner">
+      <div class="littleBanner">
+        <p>Chez Sandraya, le point de croix se réinvente à travers la résine.
+Chaque création artisanale associe la délicatesse du fil à la transparence moderne de la résine pour donner naissance à des pièces uniques et élégantes.
+
+Pendentifs, porte-clés ou objets décoratifs : chaque article est réalisé à la main avec soin, passion et souci du détail. Les créations Sandraya sont pensées comme de petits trésors faits pour durer, à offrir ou à garder pour soi.
+
+Entrez dans l’univers de Sandraya et découvrez un artisanat créatif où chaque pièce raconte une histoire.</p>
+      </div>
+      <div class="littleBanner">
+        <img src="{{asset('assets/uploads/moltiProdotti.jpg')}}" alt="">
+      </div>
+    </div>
+
+
 	<div class="collection">
 		<i class="fa-solid fa-chevron-left freccia3"></i>
 
-		<div class="carte-container">
+<div class="carte-container">
+		{% for produit in produits %}
+	{% if produit.category == "pendentif" %}
 			<div class="carte">
 				<div class="img">
-					<img src="{{asset('assets/uploads/cornice-rune.png')}}" alt="" class="cornice"/><img src="{{asset('assets/uploads/examplepoint.png')}}" alt=""/>
+                        {% for produitImage in produit.produitsImages %}
+                            
+		
+							<img src="{{asset('assets/uploads/cornice-rune.png')}}" alt="" class="cornice"/>
+							<h3>{{produit.nomProd}}</h3>
+                            <a href="{{path('app_detail_produit', {'id': produit.id})}}"><img src="{{ asset('assets/uploads/' ~ produitImage.image) }}"	
+                                 alt="Image de {{ produit.nomProd }}" class="produitImage" 
+                                 /></a> 
+                        
+                            
+                        {% endfor %}
+				</div>
+				<div class="text">
+                        <p style="margin-top: 10%;">{{produit.prix}} €</p>
+
 				</div>
 			</div>
-			<div class="carte">
-				<img src="{{asset('assets/uploads/cornice-rune.png')}}" alt="" class="cornice"/><img src="{{asset('assets/uploads/examplepoint.png')}}" alt=""/>
-			</div>
-			<div class="carte">
-				<img src="{{asset('assets/uploads/cornice-rune.png')}}" alt="" class="cornice"/><img src="{{asset('assets/uploads/examplepoint.png')}}" alt=""/>
-			</div>
-			<div class="carte">
-				<img src="{{asset('assets/uploads/cornice-rune.png')}}" alt="" class="cornice"/><img src="{{asset('assets/uploads/examplepoint.png')}}" alt=""/>
-			</div>
-			<div class="carte">
-				<img src="{{asset('assets/uploads/cornice-rune.png')}}" alt="" class="cornice"/><img src="{{asset('assets/uploads/examplepoint.png')}}" alt=""/>
-			</div>
-			<div class="carte">
-				<img src="{{asset('assets/uploads/cornice-rune.png')}}" alt="" class="cornice"/><img src="{{asset('assets/uploads/examplepoint.png')}}" alt=""/>
-			</div>
-			<div class="carte">
-				<img src="{{asset('assets/uploads/cornice-rune.png')}}" alt="" class="cornice"/><img src="{{asset('assets/uploads/examplepoint.png')}}" alt=""/>
-			</div>
+		
+		{% endif %}
+		{% endfor %}
 		</div>
 
 		<i class="fa-solid fa-chevron-right freccia4"></i>

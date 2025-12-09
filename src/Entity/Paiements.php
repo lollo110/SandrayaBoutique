@@ -31,6 +31,11 @@ class Paiements
     #[ORM\JoinColumn(nullable: false)]
     private ?Commandes $commande = null;
 
+    public function __construct()
+    {
+        $this->date_paiement = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,11 +82,10 @@ class Paiements
         return $this->date_paiement;
     }
 
-    public function setDatePaiement(\DateTime $date_paiement): static
+    public function setDatePaiement(\DateTime $date_paiement): void
     {
-        $this->date_paiement = $date_paiement;
+        $this->date_paiement = new \DateTime;
 
-        return $this;
     }
 
     public function getIdCommande(): ?Commandes

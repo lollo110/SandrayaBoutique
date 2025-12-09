@@ -31,6 +31,11 @@ class Avis
     #[ORM\JoinColumn(nullable: false)]
     private ?Produits $produit = null;
 
+    public function __construct()
+    {
+        $this->date_avis = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -65,11 +70,10 @@ class Avis
         return $this->date_avis;
     }
 
-    public function setDateAvis(\DateTime $date_avis): static
+    public function setDateAvis(\DateTime $date_avis): void
     {
-        $this->date_avis = $date_avis;
+        $this->date_avis = new \DateTime;
 
-        return $this;
     }
 
     public function getIdUser(): ?Users

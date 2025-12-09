@@ -24,6 +24,11 @@ class Favoris
     #[ORM\Column]
     private ?\DateTime $date = null;
 
+    public function __construct()
+    {
+        $this->date = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -58,10 +63,9 @@ class Favoris
         return $this->date;
     }
 
-    public function setDate(\DateTime $date): static
+    public function setDate(\DateTime $date): void
     {
-        $this->date = $date;
+        $this->date = new \DateTime();
 
-        return $this;
     }
 }

@@ -31,13 +31,23 @@ class ProduitsRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Produits
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findAllWithImages(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.produitsImages', 'pi')
+            ->addSelect('pi')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    public function findOneByIdWithImages(int $id): ?Produits
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $id)
+            ->leftJoin('p.produitsImages', 'pi')
+            ->addSelect('pi')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

@@ -1,11 +1,11 @@
-// Menu pour connexion/inscription
+// MENU CONNEXION / PANIER --------------------------------------------
 let omino = document.getElementById("omino");
 let panier = document.getElementById("panier");
+let collection = document.querySelector(".collection");
 
 let show = document.querySelector(".show");
 let showPanier = document.querySelector(".showPanier");
 
-// ouverture / fermeture menu
 omino.addEventListener("click", function (e) {
     e.stopPropagation();
 
@@ -14,26 +14,33 @@ omino.addEventListener("click", function (e) {
     show.classList.toggle("active");
 });
 
-// --- OUVERTURE / FERMETURE PANIER ---
 panier.addEventListener("click", function (e) {
     e.stopPropagation();
 
- 
     show.classList.remove("active");
-
-
     showPanier.classList.toggle("active2");
+
+    if (showPanier.classList.contains("active2")) {
+        if (collection) collection.style.zIndex = "-1";
+        if (right) right.style.zIndex = "-1";
+    } else {
+        if (collection) collection.style.zIndex = "1";
+        if (right) right.style.zIndex = "2001";
+    }
 });
 
-// --- CLIC EXTÉRIEUR ---
 window.addEventListener("click", function () {
     show.classList.remove("active");
     showPanier.classList.remove("active2");
+    if (collection) {
+        collection.style.zIndex = "1";
+    }
+    if (right) {
+        right.style.zIndex = "2001";
+    }
 });
 
-// -------------------------
-// CAROUSEL IMAGES
-// -------------------------
+// CAROUSEL IMAGES ---------------------------------------------
 
 const left = document.querySelector(".freccia");
 const right = document.querySelector(".freccia2");
@@ -56,26 +63,22 @@ function updateSlide() {
 
 if (left && right) {
     right.addEventListener("click", () => {
-        indexImages = (indexImages < maxIndexImages) ? indexImages + 1 : 0;
+        indexImages = indexImages < maxIndexImages ? indexImages + 1 : 0;
         updateSlide();
     });
 
     left.addEventListener("click", () => {
-        indexImages = (indexImages > 0) ? indexImages - 1 : maxIndexImages;
+        indexImages = indexImages > 0 ? indexImages - 1 : maxIndexImages;
         updateSlide();
     });
 }
 
-// Défilement automatique toutes les 5 secondes
 setInterval(() => {
-    indexImages = (indexImages < maxIndexImages) ? indexImages + 1 : 0;
+    indexImages = indexImages < maxIndexImages ? indexImages + 1 : 0;
     updateSlide();
 }, 5000);
 
-
-// -------------------------
-// CAROUSEL CARTES
-// -------------------------
+// CAROUSEL CARTES ---------------------------------------------
 
 const leftCards = document.querySelector(".freccia3");
 const rightCards = document.querySelector(".freccia4");
@@ -97,12 +100,36 @@ function updateSlideCards() {
 
 if (leftCards && rightCards) {
     rightCards.addEventListener("click", () => {
-        indexCards = (indexCards < maxIndexCards) ? indexCards + 1 : 0;
+        indexCards = indexCards < maxIndexCards ? indexCards + 1 : 0;
         updateSlideCards();
     });
 
     leftCards.addEventListener("click", () => {
-        indexCards = (indexCards > 0) ? indexCards - 1 : maxIndexCards;
+        indexCards = indexCards > 0 ? indexCards - 1 : maxIndexCards;
         updateSlideCards();
     });
 }
+
+// PRODUIT BANNER ---------------------------------------------------
+
+const banner = document.querySelector(".produitBanner");
+
+window.addEventListener('DOMContentLoaded', function(){
+    if(banner){
+
+        banner.classList.add("visible");
+    }
+})
+
+
+// DETAIL PRODUIT - IMAGES ---------------------------------------------
+
+const imgBig = document.querySelector(".imgGrand img");
+const imgSmall = document.querySelectorAll(".imgPicco img");
+
+if (imgBig && imgSmall)
+imgSmall.forEach((img) => {
+    img.addEventListener("click", function () {
+        imgBig.src = img.src;
+    });
+});
