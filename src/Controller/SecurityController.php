@@ -3,17 +3,26 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, Request $request, SessionInterface $sessionInterface): Response
     {
+
+        $cookie = $request->cookies->get("cartCookie");
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+        
+        $cookieDeCode = json_decode($cookie, true);
+        $sessionInterface->set('cart', $cookieDeCode);
+
+        // dd($sessionInterface->get('cart', []));
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();

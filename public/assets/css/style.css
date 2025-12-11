@@ -82,6 +82,7 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
+    z-index: 2000;
 }
 
 .show {
@@ -112,13 +113,63 @@ body {
     opacity: 0;
     transform: translateX(30px);
     pointer-events: none;
-    width: 20%;
-    height: 80vh;
+    width: 30%;
     font-size: 1.2em;
     text-align: end;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+
 
     transition: opacity 1s ease, transform 1s ease;
 }
+
+
+
+.showPanier #panier-list{
+    flex: 1;
+    list-style: none;               /* prend l'espace dispo */
+    overflow-y: auto;        /* SCROLL */
+    padding: 10px;
+    margin: 0;
+}
+
+#panier-list::-webkit-scrollbar {
+    width: 6px;
+}
+#panier-list::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+#panier-list li{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.textPanier {
+    display: flex;
+    flex-direction: column;
+}
+
+.imgPanier{
+    width: 50%;
+}
+
+
+#panier-total,
+#cart-actions {
+    padding: 10px;
+    border-top: 1px solid #eee;
+}
+
+
+.imgPanier img {
+    width: 100%;
+} 
+
 
 .active {
     opacity: 1;
@@ -365,7 +416,7 @@ form button:hover {
     align-items: center;
     width: 100%;
     overflow: hidden;
-    height: 60vh;
+    height: 80vh;
     position: relative;
     z-index: 1;
 }
@@ -378,7 +429,20 @@ form button:hover {
     min-width: calc(100% / 3);
     text-align: center;
     position: relative;
-    height: 45vh;
+    height: 60vh;
+}
+
+.carte i{
+    background-color: #e79ebd;
+    padding: 4px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 2em;
+    position: absolute;
+    top: 2%;
+    left: 22%;
+    cursor: pointer;
 }
 
 .img{
@@ -388,11 +452,11 @@ form button:hover {
 
 .cornice {
     position: absolute;
-    bottom: -5%;
+    bottom: 8%;
     left: 50%;
     transform: translateX(-50%);
     width: 50%;
-    height: 40%;
+    height: 35%;
     z-index: 1000;
 }
 
@@ -403,14 +467,14 @@ form button:hover {
     box-shadow: 1px 1px 20px #e79ebd;
     border: solid 3px #ffffff;
 }
-.carte h3{
+
+.text{
     position: absolute;
-    bottom: 9%;
+    bottom: 22%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2000;
-    font-size: 0.9em;
-    width: 230px;
+    width: 40%;
 }
 
 
@@ -447,3 +511,5 @@ form button:hover {
     height: 10vh;
 
 }
+
+

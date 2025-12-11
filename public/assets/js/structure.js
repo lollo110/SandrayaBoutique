@@ -29,16 +29,16 @@ panier.addEventListener("click", function (e) {
     }
 });
 
-window.addEventListener("click", function () {
-    show.classList.remove("active");
-    showPanier.classList.remove("active2");
-    if (collection) {
-        collection.style.zIndex = "1";
-    }
-    if (right) {
-        right.style.zIndex = "2001";
-    }
-});
+// window.addEventListener("click", function () {
+//     show.classList.remove("active");
+//     showPanier.classList.remove("active2");
+//     if (collection) {
+//         collection.style.zIndex = "1";
+//     }
+//     if (right) {
+//         right.style.zIndex = "2001";
+//     }
+// });
 
 // CAROUSEL IMAGES ---------------------------------------------
 
@@ -114,13 +114,11 @@ if (leftCards && rightCards) {
 
 const banner = document.querySelector(".produitBanner");
 
-window.addEventListener('DOMContentLoaded', function(){
-    if(banner){
-
+window.addEventListener("DOMContentLoaded", function () {
+    if (banner) {
         banner.classList.add("visible");
     }
-})
-
+});
 
 // DETAIL PRODUIT - IMAGES ---------------------------------------------
 
@@ -128,8 +126,167 @@ const imgBig = document.querySelector(".imgGrand img");
 const imgSmall = document.querySelectorAll(".imgPicco img");
 
 if (imgBig && imgSmall)
-imgSmall.forEach((img) => {
-    img.addEventListener("click", function () {
-        imgBig.src = img.src;
+    imgSmall.forEach((img) => {
+        img.addEventListener("click", function () {
+            imgBig.src = img.src;
+        });
     });
+
+// ADD TO PANIER
+
+let plus = document.querySelectorAll(".addToCart");
+let panierList = document.getElementById("panier-list");
+let totalQtyElem = document.getElementById("total-qty");
+let totalPriceElem = document.getElementById("total-price");
+let panierMap = {};
+
+// Initialiser panierMap avec les items existants
+document.querySelectorAll("#panier-list li").forEach((li) => {
+    panierMap[li.dataset.id] = li;
+});
+
+// Fonction pour ajouter 1 produit
+async function addToCart(id) {
+    try {
+        const res = await fetch("/panier/ajouter/" + id, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",  
+            },
+            body: JSON.stringify({ qty: 1 }),
+        });
+
+        if (!res.ok) throw new Error("Erreur ajout panier");
+
+        const data = await res.json();
+        const produit = data.produit;
+
+        if (panierMap[produit.id]) {
+            const li = panierMap[produit.id];
+            li.querySelector(".qty").textContent = `Quantité: ${produit.qty}`;
+            li.querySelector(".price").textContent = `Prix: ${(
+                produit.prix * produit.qty
+            ).toFixed(2)} €`;
+        } else {
+            const li = document.createElement("li");
+            li.dataset.id = produit.id;
+            li.dataset.price = produit.prix;
+            li.innerHTML = `
+            <div class="imgPanier">
+                <img src="${produit.images[0]}" alt="${produit.nom}" />
+            </div>
+            <div class="textPanier">
+                <span class="name">${produit.nom}</span>
+                <span class="qty">Quantité: ${produit.qty}</span>
+                <span class="price">Prix: ${(
+                    produit.prix * produit.qty
+                ).toFixed(2)} €</span>
+                <button class="add-one-btn">+</button>
+                <button class="remove-btn">-</button>
+                </div>
+            `;
+            panierList.appendChild(li);
+            panierMap[produit.id] = li;
+        }
+
+        updateTotal();
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// Fonction pour modifier la quantité via les boutons
+async function updateQty(id, change) {
+    try {
+        const res = await fetch("/panier/ajouter/" + id, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ qty: change }), // peut être +1 ou -1
+        });
+
+        if (!res.ok) throw new Error("Erreur mise à jour panier");
+
+        const data = await res.json();
+        const produit = data.produit;
+
+        if (produit.qty <= 0) {
+            // Supprimer le li si qty = 0
+            const li = panierMap[produit.id];
+            li.remove();
+            delete panierMap[produit.id];
+        } else {
+            // Mettre à jour qty et prix
+            const li = panierMap[produit.id];
+            li.querySelector(".qty").textContent = `Quantité: ${produit.qty}`;
+            li.querySelector(".price").textContent = `Prix: ${(
+                produit.prix * produit.qty
+            ).toFixed(2)} €`;
+        }
+
+        updateTotal();
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// Recalcul du total
+function updateTotal() {
+    let totalQty = 0;
+    let totalPrice = 0;
+
+    Object.values(panierMap).forEach((li) => {
+        const qty = parseInt(
+            li.querySelector(".qty").textContent.replace("Quantité: ", "")
+        );
+        const price = parseFloat(li.dataset.price) * qty;
+        totalQty += qty;
+        totalPrice += price;
+    });
+
+    totalQtyElem.textContent = totalQty;
+    totalPriceElem.textContent = totalPrice.toFixed(2);
+}
+
+// Ajouter event listeners aux boutons d'ajout initiaux
+plus.forEach((button) => {
+    button.addEventListener("click", () => addToCart(button.id));
+});
+
+const checkoutBtn = document.getElementById("checkout-btn");
+const clearCartBtn = document.getElementById("clear-cart-btn");
+
+// // Rediriger vers la page checkout
+// checkoutBtn.addEventListener("click", () => {
+//     window.location.href = "/checkout"; // Change selon ta route Symfony
+// });
+
+// Vider le panier
+clearCartBtn.addEventListener("click", async () => {
+    try {
+        const res = await fetch("/panier/vider", { method: "POST" });
+        if (!res.ok) throw new Error("Erreur lors de la vidange du panier");
+
+        // Supprimer tous les li
+        Object.values(panierMap).forEach((li) => li.remove());
+        panierMap = {};
+
+        // Réinitialiser le total
+        updateTotal();
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+panierList.addEventListener("click", (e) => {
+    if (e.target.classList.contains("remove-btn")) {
+        const li = e.target.closest("li");
+        const id = li.dataset.id;
+        updateQty(id, -1);
+    }
+
+    if (e.target.classList.contains("add-one-btn")) {
+        const li = e.target.closest("li");
+        const id = li.dataset.id;
+        updateQty(id, 1);
+    }
 });
