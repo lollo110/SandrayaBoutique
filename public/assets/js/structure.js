@@ -6,6 +6,10 @@ let collection = document.querySelector(".collection");
 let show = document.querySelector(".show");
 let showPanier = document.querySelector(".showPanier");
 
+showPanier.addEventListener("click", function (e) {
+    e.stopPropagation();
+});
+
 omino.addEventListener("click", function (e) {
     e.stopPropagation();
 
@@ -29,16 +33,16 @@ panier.addEventListener("click", function (e) {
     }
 });
 
-// window.addEventListener("click", function () {
-//     show.classList.remove("active");
-//     showPanier.classList.remove("active2");
-//     if (collection) {
-//         collection.style.zIndex = "1";
-//     }
-//     if (right) {
-//         right.style.zIndex = "2001";
-//     }
-// });
+window.addEventListener("click", function () {
+    show.classList.remove("active");
+    showPanier.classList.remove("active2");
+    if (collection) {
+        collection.style.zIndex = "1";
+    }
+    if (right) {
+        right.style.zIndex = "2001";
+    }
+});
 
 // CAROUSEL IMAGES ---------------------------------------------
 
@@ -201,7 +205,7 @@ async function updateQty(id, change) {
         const res = await fetch("/panier/ajouter/" + id, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ qty: change }), // peut être +1 ou -1
+            body: JSON.stringify({ qty: change }),
         });
 
         if (!res.ok) throw new Error("Erreur mise à jour panier");
@@ -210,12 +214,10 @@ async function updateQty(id, change) {
         const produit = data.produit;
 
         if (produit.qty <= 0) {
-            // Supprimer le li si qty = 0
             const li = panierMap[produit.id];
             li.remove();
             delete panierMap[produit.id];
         } else {
-            // Mettre à jour qty et prix
             const li = panierMap[produit.id];
             li.querySelector(".qty").textContent = `Quantité: ${produit.qty}`;
             li.querySelector(".price").textContent = `Prix: ${(
@@ -266,11 +268,9 @@ clearCartBtn.addEventListener("click", async () => {
         const res = await fetch("/panier/vider", { method: "POST" });
         if (!res.ok) throw new Error("Erreur lors de la vidange du panier");
 
-        // Supprimer tous les li
         Object.values(panierMap).forEach((li) => li.remove());
         panierMap = {};
 
-        // Réinitialiser le total
         updateTotal();
     } catch (error) {
         console.error(error);
