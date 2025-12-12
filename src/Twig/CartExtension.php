@@ -22,14 +22,13 @@ class CartExtension extends AbstractExtension implements GlobalsInterface
 {
     $session = $this->requestStack->getSession();
 
-    // Sécurisation : la session peut être null
+
     if (!$session) {
         $cart = [];
     } else {
         $cart = $session->get('cart', []);
     }
 
-    // Par sécurité : on force un tableau
     if (!is_array($cart)) {
         $cart = [];
     }
@@ -44,7 +43,6 @@ class CartExtension extends AbstractExtension implements GlobalsInterface
 
         if ($produit) {
 
-            // Sécurité pour l’image
             $images = $produit->getProduitsImages();
             $image = ($images && $images->first())
                 ? '/assets/uploads/' . $images->first()->getImage()

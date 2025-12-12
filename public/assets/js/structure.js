@@ -185,8 +185,10 @@ async function addToCart(id) {
                 <span class="price">Prix: ${(
                     produit.prix * produit.qty
                 ).toFixed(2)} €</span>
+                <div class="plusMoins">
+				<button class="remove-btn">-</button>
                 <button class="add-one-btn">+</button>
-                <button class="remove-btn">-</button>
+				</div>
                 </div>
             `;
             panierList.appendChild(li);

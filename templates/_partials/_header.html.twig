@@ -1,55 +1,74 @@
 <header>
 	<div class="nav">
-			<div class="icone">
-				<i class="fa-solid fa-cart-shopping" id="panier"></i>
-				<i class="fa-solid fa-user" id="omino"></i>
-		<div class="showPanier">
-			<ul id="panier-list">
-        {% for item in cartItems %}
-            <li data-id="{{ item.id }}" data-price="{{ item.prix }}">
-			<div class="imgPanier">
-                <img src="{{ item.image }}" alt="{{ item.nom }}" />
-			</div>
-			<div class="textPanier">
-                <span class="name">{{ item.nom }}</span>
-                <span class="qty">Quantité: {{ item.qty }}</span>
-                <span class="price">Prix: {{ (item.prix * item.qty)|number_format(2, ',', '.') }} €</span>
-                <button class="add-one-btn">+</button>
-				<button class="remove-btn">-</button>
-			</div>
-            </li>
-        {% endfor %}
-    </ul>
+		<div class="icone">
+			<i class="fa-solid fa-cart-shopping" id="panier"></i>
+			<i class="fa-solid fa-user" id="omino"></i>
+			<div class="showPanier">
+				<ul id="panier-list">
+					{% for item in cartItems %}
+						{% if item.qty > 0 %}
+							<li data-id="{{ item.id }}" data-price="{{ item.prix }}">
+								<div class="imgPanier">
+									<img src="{{ item.image }}" alt="{{ item.nom }}"/>
+								</div>
+								<div class="textPanier">
+									<span class="name">{{ item.nom }}</span>
+									<span class="qty">Quantité:
+										{{ item.qty }}</span>
+									<span class="price">Prix:
+										{{ (item.prix * item.qty)|number_format(2, ',', '.') }}
+										€</span>
+									<div class="plusMoins">
+										<button class="remove-btn">-</button>
+										<button class="add-one-btn">+</button>
+									</div>
+								</div>
+							</li>
+						{% endif %}
+					{% endfor %}
+				</ul>
 
-    <div id="panier-total">
-        <span>Total articles: <span id="total-qty">{{ totalQty }}</span></span>
-        <span>Total prix: <span id="total-price">{{ totalPrice|number_format(2, ',', '.') }}</span> €</span>
-    </div>
-	<div id="cart-actions">
-        <button id="checkout-btn">Acheter</button>
-        <button id="clear-cart-btn">Vider le panier</button>
-    </div>
-		</div>
-		<div class="show">
-			<ul>
-				{% if app.user %}
-					{% if is_granted('ROLE_ADMIN') %}
-					
-						<li><a href="{{path('admin')}}">Admin</a></li>
-					
-					{% endif %}
-					<li><a href="{{path('app_logout')}}">Se deconnecter</a></li>
-				{% else %}
-					
-						<li><a href="{{path('app_login')}}">Se connecter</a></li>
-					
-					
-						<li><a href="{{path('app_register')}}">S'inscrire</a></li>
-					
-				{% endif %}
-			</ul>
-		</div>
+				<div id="panier-total">
+					<span>Total articles:
+						<span id="total-qty">{{ totalQty }}</span>
+					</span>
+					<span>Total prix:
+						<span id="total-price">{{ totalPrice|number_format(2, ',', '.') }}</span>
+						€</span>
+				</div>
+				<div id="cart-actions">
+					<button id="checkout-btn">Acheter</button>
+					<button id="clear-cart-btn">Vider le panier</button>
+				</div>
 			</div>
+			<div class="show">
+				<ul>
+					{% if app.user %}
+						{% if is_granted('ROLE_ADMIN') %}
+
+							<li>
+								<a href="{{path('admin')}}">Admin</a>
+							</li>
+
+						{% endif %}
+						<li>
+							<a href="{{path('app_logout')}}">Se deconnecter</a>
+						</li>
+					{% else %}
+
+						<li>
+							<a href="{{path('app_login')}}">Se connecter</a>
+						</li>
+
+
+						<li>
+							<a href="{{path('app_register')}}">S'inscrire</a>
+						</li>
+
+					{% endif %}
+				</ul>
+			</div>
+		</div>
 		<div class="titre">
 			<img src="{{asset('assets/uploads/ramoBig.png')}}" alt="branche d’arbre avec des fleurs roses">
 			<img src="{{asset('assets/uploads/logo.png')}}" alt="logo ssite Sandraya">

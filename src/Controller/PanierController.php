@@ -31,7 +31,7 @@ final class PanierController extends AbstractController
         $cart = $session->get('cart', []);
 
         if (isset($cart[$id])) {
-            $cart[$id] += $qty; // augmenter la quantité
+            $cart[$id] += $qty;
         } else {
             $cart[$id] = $qty;
         }
@@ -44,7 +44,7 @@ final class PanierController extends AbstractController
             'id' => $produit->getId(),
             'nom' => $produit->getNomProd(),
             'prix' => $produit->getPrix(),
-            'qty' => $cart[$id], // quantité totale dans le panier
+            'qty' => $cart[$id],
             'images' => []
         ];
 
@@ -57,12 +57,14 @@ final class PanierController extends AbstractController
             'nb' => count($cart)
         ]);
 
-        $cookie = Cookie::create('cartCookie')
-            ->withValue(json_encode($cart))
-            ->withExpires(new \DateTime('+7 days'))
-            ->withPath('/');
+        if ($this->getUser()) {
+            $cookie = Cookie::create('cartCookie')
+                ->withValue(json_encode($cart))
+                ->withExpires(new \DateTime('+7 days'))
+                ->withPath('/');
 
-        $response->headers->setCookie($cookie);
+            $response->headers->setCookie($cookie);
+        }
 
         return $response;
     }
@@ -75,12 +77,14 @@ final class PanierController extends AbstractController
 
         $response = new JsonResponse(['success' => true]);
 
-        $cookie = Cookie::create('cartCookie')
-            ->withValue(json_encode($session->get('cart', [])))
-            ->withExpires(new \DateTime('-1 days'))
-            ->withPath('/');
+        if ($this->getUser()) {
+            $cookie = Cookie::create('cartCookie')
+                ->withValue('')
+                ->withExpires(new \DateTime('-1 days'))
+                ->withPath('/');
 
-        $response->headers->setCookie($cookie);
+            $response->headers->setCookie($cookie);
+        }
 
         return $response;
     }
