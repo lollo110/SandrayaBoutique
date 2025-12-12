@@ -19,33 +19,54 @@ class CartExtension extends AbstractExtension implements GlobalsInterface
     }
 
     public function getGlobals(): array
-    {
-        $session = $this->requestStack->getSession(); // Récupérer la session
-        $cart = $session ? $session->get('cart', []) : [];
-        // dd($cart);
-        $cartItems = [];
-        $totalQty = 0;
-        $totalPrice = 0;
+{
+    $session = $this->requestStack->getSession();
 
-        foreach ($cart as $id => &$qty) {
-            $produit = $this->produitRepo->find($id);
-            if ($produit) {
-                $cartItems[] = [
-                    'id' => $produit->getId(),
-                    'nom' => $produit->getNomProd(),
-                    'prix' => $produit->getPrix(),
-                    'qty' => $qty,
-                    'image' => $produit->getProduitsImages()[0] ? '/assets/uploads/' . $produit->getProduitsImages()[0]->getImage() : null
-                ];
-                $totalQty += $qty;
-                $totalPrice += $produit->getPrix() * $qty;
-            }
-        }
-
-        return [
-            'cartItems' => $cartItems,
-            'totalQty' => $totalQty,
-            'totalPrice' => $totalPrice
-        ];
+    // Sécurisation : la session peut être null
+    if (!$session) {
+        $cart = [];
+    } else {
+        $cart = $session->get('cart', []);
     }
+
+    // Par sécurité : on force un tableau
+    if (!is_array($cart)) {
+        $cart = [];
+    }
+
+    $cartItems = [];
+    $totalQty = 0;
+    $totalPrice = 0;
+
+    foreach ($cart as $id => $qty) {
+
+        $produit = $this->produitRepo->find($id);
+
+        if ($produit) {
+
+            // Sécurité pour l’image
+            $images = $produit->getProduitsImages();
+            $image = ($images && $images->first())
+                ? '/assets/uploads/' . $images->first()->getImage()
+                : null;
+
+            $cartItems[] = [
+                'id' => $produit->getId(),
+                'nom' => $produit->getNomProd(),
+                'prix' => $produit->getPrix(),
+                'qty' => $qty,
+                'image' => $image
+            ];
+
+            $totalQty += $qty;
+            $totalPrice += $produit->getPrix() * $qty;
+        }
+    }
+
+    return [
+        'cartItems' => $cartItems,
+        'totalQty' => $totalQty,
+        'totalPrice' => $totalPrice
+    ];
+}
 }
