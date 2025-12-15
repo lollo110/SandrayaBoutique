@@ -4,40 +4,52 @@
 {% endblock %}
 
 {% block body %}
-    <div class="contain">
-        <div class="sin">
-            
-            <div class="imgGrand">
-                {% set image_principal = produit.produitsImages|first %}
-                {% if image_principal %}
-                    <img src="{{ asset('assets/uploads/' ~ image_principal.image) }}" 
-                         alt="{{ produit.nomProd }} (Image principale)" /> 
-                {% else %}
-                    <img src="{{ asset('assets/uploads/placeholder.png') }}" alt="Aucune image"/>
-                {% endif %}
-            </div>
-            
-           
-            <div class="imgPicco">
-                {% for produitImage in produit.produitsImages %}
-                    <img src="{{ asset('assets/uploads/' ~ produitImage.image) }}" 
-                         alt="Miniature {{ loop.index }}"
-                         />
-                {% endfor %}
-            </div>
-            
-        </div>
-        
-        <div class="dest">
-            <div class="description">
-                <h2>{{ produit.nomProd }}</h2>
-                <p>Prix : **{{ produit.prix }} €**</p>
-            </div>
-            <div class="description">
-                <h3>Description détaillée :</h3>
-                <p>{{ produit.description|raw }}</p> 
-            </div>
-            {# Ajoutez ici le bouton d'ajout au panier, la gestion du stock, etc. #}
-        </div>
-    </div>
+	<div class="contain">
+		<div class="sin">
+
+			<div class="imgGrand">
+				{% set image_principal = produit.produitsImages|first %}
+				{% if image_principal %}
+					<img src="{{ asset('assets/uploads/' ~ image_principal.image) }}" alt="{{ produit.nomProd }} (Image principale)"/>
+				{% else %}
+					<img src="{{ asset('assets/uploads/placeholder.png') }}" alt="Aucune image"/>
+				{% endif %}
+			</div>
+
+
+			<div class="imgPicco">
+				{% for produitImage in produit.produitsImages %}
+					<img src="{{ asset('assets/uploads/' ~ produitImage.image) }}" alt="Miniature {{ loop.index }}"/>
+				{% endfor %}
+			</div>
+
+		</div>
+
+		<div class="dest">
+			<div class="description">
+				<h2>{{ produit.nomProd }}</h2>
+			</div>
+			<div class="description">
+				<h3>Description détaillée :</h3>
+				<p>{{ produit.description|raw }}</p>
+				<p>{{produit.stock}}</p>
+			</div>
+			<p>Prix unitaire :
+				<span id="prixUnitaire">{{ produit.prix }}</span>
+				€</p>
+
+			<p class="prix-total-display">
+				Prix Total :
+				<span id="prixTotalAffiche">{{ produit.prix }}</span>
+				€
+			</p>
+
+			<div class="quantite-select">
+				<label for="quantite">Quantité :</label>
+				<input type="number" id="quantite-produit" name="quantite" value="1" min="1" data-prix="{{ produit.prix }}" max="{{produit.stock}}" data-stock="{{produit.stock}}" style="width: 60px; text-align: center; margin-right: 10px;"/>
+				<button class="addPanier" id="{{produit.id}}">Ajouter au panier</button>
+			</div>
+
+		</div>
+	</div>
 {% endblock %}

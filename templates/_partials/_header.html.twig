@@ -13,7 +13,7 @@
 								</div>
 								<div class="textPanier">
 									<span class="name">{{ item.nom }}</span>
-									<span class="qty">Quantité:
+									<span class="qty" data-qty='{{item.qty}}'>Quantité:
 										{{ item.qty }}</span>
 									<span class="price">Prix:
 										{{ (item.prix * item.qty)|number_format(2, ',', '.') }}

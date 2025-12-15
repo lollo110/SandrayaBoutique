@@ -513,14 +513,16 @@ form button:hover {
     width: 80%;
     margin: auto;
     gap: 2%;
+    position: relative;
+    border: 1px solid;
 }
 
 .sin{
-    width: 30%;
+    width: 50%;
     text-align: right;
 }
 .dest{
-    width: 50%;
+    width: 100%;
 }
 
 .imgPicco{
@@ -534,4 +536,24 @@ form button:hover {
 
 }
 
+.description{
+    width: 100%;
+}
+.quantite-select{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 10%;
+    right: 2%;
+}
+
+.quantite-select input{
+    padding: 5px;
+}
+
+.prix-total-display{
+    position: absolute;
+    bottom: 10%;
+    font-size: 3em;
+}
 

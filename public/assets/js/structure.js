@@ -136,28 +136,32 @@ if (imgBig && imgSmall)
         });
     });
 
-// ADD TO PANIER
+// ADD TO PANIER --------------------------------
 
+let plusDetails = document.querySelector(".addPanier");
 let plus = document.querySelectorAll(".addToCart");
 let panierList = document.getElementById("panier-list");
 let totalQtyElem = document.getElementById("total-qty");
 let totalPriceElem = document.getElementById("total-price");
 let panierMap = {};
 
-// Initialiser panierMap avec les items existants
+const quantiteInput = document.getElementById("quantite-produit");
+
 document.querySelectorAll("#panier-list li").forEach((li) => {
     panierMap[li.dataset.id] = li;
 });
 
-// Fonction pour ajouter 1 produit
-async function addToCart(id) {
+async function addToCart(id, qtyToAdd) {
+    if (isNaN(qtyToAdd) || qtyToAdd < 1) {
+        qtyToAdd = 1;
+    }
     try {
         const res = await fetch("/panier/ajouter/" + id, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",  
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify({ qty: 1 }),
+            body: JSON.stringify({ qty: qtyToAdd }),
         });
 
         if (!res.ok) throw new Error("Erreur ajout panier");
@@ -201,7 +205,6 @@ async function addToCart(id) {
     }
 }
 
-// Fonction pour modifier la quantité via les boutons
 async function updateQty(id, change) {
     try {
         const res = await fetch("/panier/ajouter/" + id, {
@@ -214,7 +217,6 @@ async function updateQty(id, change) {
 
         const data = await res.json();
         const produit = data.produit;
-
         if (produit.qty <= 0) {
             const li = panierMap[produit.id];
             li.remove();
@@ -233,28 +235,44 @@ async function updateQty(id, change) {
     }
 }
 
-// Recalcul du total
 function updateTotal() {
     let totalQty = 0;
     let totalPrice = 0;
 
     Object.values(panierMap).forEach((li) => {
-        const qty = parseInt(
-            li.querySelector(".qty").textContent.replace("Quantité: ", "")
-        );
-        const price = parseFloat(li.dataset.price) * qty;
+        const qtyGet = li
+            .querySelector(".qty")
+            .textContent.replace("Quantité: ", "");
+
+        const qty = parseInt(qtyGet);
+        const datasetPrice = parseFloat(li.dataset.price);
+        const price = datasetPrice * qty;
         totalQty += qty;
         totalPrice += price;
     });
-
     totalQtyElem.textContent = totalQty;
     totalPriceElem.textContent = totalPrice.toFixed(2);
 }
 
-// Ajouter event listeners aux boutons d'ajout initiaux
-plus.forEach((button) => {
-    button.addEventListener("click", () => addToCart(button.id));
-});
+if (plus) {
+    plus.forEach((button) => {
+        button.addEventListener("click", () => addToCart(button.id));
+    });
+}
+
+if (plusDetails) {
+    plusDetails.addEventListener("click", async () => {
+        const quantite = parseInt(quantiteInput.value);
+
+        try {
+            await addToCart(plusDetails.id, quantite);
+            quantiteInput.value = 1;
+            prixTotalAffiche.textContent = prixUnitaire;
+        } catch (error) {
+            console.error("Erreur lors de l'ajout au panier:", error);
+        }
+    });
+}
 
 const checkoutBtn = document.getElementById("checkout-btn");
 const clearCartBtn = document.getElementById("clear-cart-btn");
@@ -264,7 +282,6 @@ const clearCartBtn = document.getElementById("clear-cart-btn");
 //     window.location.href = "/checkout"; // Change selon ta route Symfony
 // });
 
-// Vider le panier
 clearCartBtn.addEventListener("click", async () => {
     try {
         const res = await fetch("/panier/vider", { method: "POST" });
@@ -292,3 +309,40 @@ panierList.addEventListener("click", (e) => {
         updateQty(id, 1);
     }
 });
+
+// AFFICHE PRIX TOTAL PAGE DETAILSPRODUITS -------------------------------
+
+const prixTotalAffiche = document.getElementById("prixTotalAffiche");
+
+const prixUnitaire = parseFloat(quantiteInput.dataset.prix);
+
+const stockDisponible = parseInt(quantiteInput.dataset.stock);
+
+function updateTotalPrice() {
+    let quantite = parseInt(quantiteInput.value);
+
+    if (isNaN(quantite) || quantite < 1) {
+        quantite = 1;
+        quantiteInput.value = 1;
+    }
+
+    if (quantite > stockDisponible) {
+        quantite = stockDisponible;
+
+        console.warn(
+            `Seulament ${stockDisponible} articles disponibles en stock`
+        );
+    }
+
+    quantiteInput.value = quantite;
+
+    const nouveauPrixTotal = prixUnitaire * quantite;
+
+    if (prixTotalAffiche) {
+        prixTotalAffiche.textContent = nouveauPrixTotal.toFixed(2);
+    }
+}
+
+if (quantiteInput) {
+    quantiteInput.addEventListener("input", updateTotalPrice);
+}
