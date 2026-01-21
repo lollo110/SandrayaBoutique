@@ -397,6 +397,7 @@ form button:hover {
     position: fixed;
     top: 20px;
     left: 50%;
+    text-align: center;
     transform: translateX(-50%);
     background: #4CAF50;
     color: white;
