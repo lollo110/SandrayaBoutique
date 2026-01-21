@@ -256,23 +256,18 @@ function updateTotal() {
 
 if (plus) {
     plus.forEach((button) => {
-        button.addEventListener("click", () => addToCart(button.id));
+        button.addEventListener("click", async () => {
+            try {
+                await addToCart(button.id, 1); // aggiunge 1 prodotto
+                showCartMessage("Produit ajouté au panier !");
+            } catch (error) {
+                console.error("Erreur lors de l'ajout au panier:", error);
+            }
+        });
     });
 }
 
-if (plusDetails) {
-    plusDetails.addEventListener("click", async () => {
-        const quantite = parseInt(quantiteInput.value);
 
-        try {
-            await addToCart(plusDetails.id, quantite);
-            quantiteInput.value = 1;
-            prixTotalAffiche.textContent = prixUnitaire;
-        } catch (error) {
-            console.error("Erreur lors de l'ajout au panier:", error);
-        }
-    });
-}
 
 const checkoutBtn = document.getElementById("checkout-btn");
 const clearCartBtn = document.getElementById("clear-cart-btn");
@@ -300,7 +295,16 @@ panierList.addEventListener("click", (e) => {
     if (e.target.classList.contains("remove-btn")) {
         const li = e.target.closest("li");
         const id = li.dataset.id;
-        updateQty(id, -1);
+        const qtyElem = li.querySelector(".qty");
+        const qty = parseInt(qtyElem.textContent.replace("Quantité: ", ""));
+
+        if (qty <= 1) {
+            li.remove();
+            delete panierMap[id];
+            updateTotal();
+        } else {
+            updateQty(id, -1);
+        }
     }
 
     if (e.target.classList.contains("add-one-btn")) {
@@ -312,11 +316,48 @@ panierList.addEventListener("click", (e) => {
 
 // AFFICHE PRIX TOTAL PAGE DETAILSPRODUITS -------------------------------
 
+
 const prixTotalAffiche = document.getElementById("prixTotalAffiche");
 
-const prixUnitaire = parseFloat(quantiteInput.dataset.prix);
+let prixUnitaire = 0;
+let stockDisponible = 0;
 
-const stockDisponible = parseInt(quantiteInput.dataset.stock);
+if (quantiteInput) {
+    prixUnitaire = parseFloat(quantiteInput.dataset.prix) || 0;
+    stockDisponible = parseInt(quantiteInput.dataset.stock) || 0;
+
+    quantiteInput.addEventListener("input", () => {
+        let quantite = parseInt(quantiteInput.value) || 1;
+        if (quantite < 1) quantite = 1;
+        if (quantite > stockDisponible) quantite = stockDisponible;
+        quantiteInput.value = quantite;
+
+        if (prixTotalAffiche) {
+            prixTotalAffiche.textContent = (prixUnitaire * quantite).toFixed(2);
+        }
+    });
+}
+
+// Ajouter au panier depuis la page detail_produit
+
+if (plusDetails && quantiteInput && prixTotalAffiche) {
+    plusDetails.addEventListener("click", async () => {
+        let quantite = parseInt(quantiteInput.value) || 1;
+
+        try {
+            await addToCart(plusDetails.id, quantite);
+            quantiteInput.value = 1;
+
+            if (prixTotalAffiche) {
+                prixTotalAffiche.textContent = (prixUnitaire).toFixed(2);
+            }
+            showCartMessage("Produit ajouté au panier !");
+        } catch (error) {
+            console.error("Erreur lors de l'ajout au panier:", error);
+        }
+    });
+}
+
 
 function updateTotalPrice() {
     let quantite = parseInt(quantiteInput.value);
@@ -346,3 +387,58 @@ function updateTotalPrice() {
 if (quantiteInput) {
     quantiteInput.addEventListener("input", updateTotalPrice);
 }
+
+function renderCartItem(produit) {
+    if (panierMap[produit.id]) {
+        const li = panierMap[produit.id];
+        li.querySelector(".qty").textContent = `Quantité: ${produit.qty}`;
+        li.querySelector(".price").textContent = `Prix: ${(produit.prix * produit.qty).toFixed(2)} €`;
+    } else {
+        const li = document.createElement("li");
+        li.dataset.id = produit.id;
+        li.dataset.price = produit.prix;
+        li.innerHTML = `
+            <div class="imgPanier">
+                <img src="${produit.images[0]}" alt="${produit.nom}" />
+            </div>
+            <div class="textPanier">
+                <span class="name">${produit.nom}</span>
+                <span class="qty">Quantité: ${produit.qty}</span>
+                <span class="price">Prix: ${(produit.prix * produit.qty).toFixed(2)} €</span>
+                <div class="plusMoins">
+                    <button class="remove-btn">-</button>
+                    <button class="add-one-btn">+</button>
+                </div>
+            </div>
+        `;
+        panierList.appendChild(li);
+        panierMap[produit.id] = li;
+    }
+}
+
+window.addEventListener("DOMContentLoaded", async () => {
+    const res = await fetch("/panier/get");
+    const data = await res.json();
+    data.items.forEach(produit => {
+        renderCartItem(produit); // solo render, senza POST
+    });
+    updateTotal();
+});
+
+const cartMessage = document.getElementById("cart-message");
+
+function showCartMessage(msg) {
+    if (!cartMessage) return;
+    cartMessage.textContent = msg;
+    cartMessage.classList.add("show");
+    cartMessage.style.display = "block";
+
+    setTimeout(() => {
+        cartMessage.classList.remove("show");
+        cartMessage.style.display = "none";
+    }, 2000);
+}
+
+
+
+

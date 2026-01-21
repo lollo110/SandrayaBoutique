@@ -31,10 +31,14 @@ final class PanierController extends AbstractController
         $cart = $session->get('cart', []);
 
         if (isset($cart[$id])) {
-            $cart[$id] += $qty;
-        } else {
-            $cart[$id] = $qty;
-        }
+    $cart[$id] += $qty;
+} else {
+    $cart[$id] = $qty;
+}
+
+if ($cart[$id] <= 0) {
+    unset($cart[$id]);
+}
 
         $session->set('cart', $cart);
 
@@ -54,7 +58,7 @@ final class PanierController extends AbstractController
 
         $response = new JsonResponse([
             'produit' => $produitData,
-            'nb' => count($cart)
+            $nb = array_sum($cart)
         ]);
 
         if ($this->getUser()) {
@@ -88,4 +92,28 @@ final class PanierController extends AbstractController
 
         return $response;
     }
+
+    #[Route('/panier/get', name: 'app_panier_get', methods: ['GET'])]
+public function getPanier(SessionInterface $session, ProduitsRepository $repo): JsonResponse
+{
+    $cart = $session->get('cart', []);
+    $items = [];
+
+    foreach ($cart as $id => $qty) {
+        $produit = $repo->find($id);
+        if (!$produit) continue;
+
+        $items[] = [
+            'id' => $produit->getId(),
+            'nom' => $produit->getNomProd(),
+            'prix' => $produit->getPrix(),
+            'qty' => $qty,
+            'images' => [
+                '/assets/uploads/' . $produit->getProduitsImages()->first()?->getImage()
+            ]
+        ];
+    }
+
+    return new JsonResponse(['items' => $items]);
+}
 }
