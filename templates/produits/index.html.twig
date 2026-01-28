@@ -24,37 +24,15 @@
 	</div>
 
 
-	<div class="collection">
-		<i class="fa-solid fa-chevron-left freccia3"></i>
+	<h2>Pendentifs</h2>
+{% include 'produits/_collection.html.twig' with {
+    produits: produits,
+    category: 'pendentif'
+} %}
 
-		<div class="carte-container">
-			{% for produit in produits %}
-				{% if produit.category == "pendentif" %}
-					<div class="carte">
-					<i class="fa-solid fa-plus addToCart" id="{{produit.id}}"></i>
-						<div class="img">
-							{% for produitImage in produit.produitsImages %}
-
-
-								<img src="{{asset('assets/uploads/cornice-rune.png')}}" alt="" class="cornice"/>
-								<div class="text">
-									<h3>{{produit.nomProd}}</h3>
-									<p>{{produit.prix}}
-										€</p>
-
-								</div>
-								<a href="{{path('app_detail_produit', {'id': produit.id})}}"><img src="{{ asset('assets/uploads/' ~ produitImage.image) }}" alt="Image de {{ produit.nomProd }}" class="produitImage"/></a>
-
-
-							{% endfor %}
-						</div>
-
-					</div>
-
-				{% endif %}
-			{% endfor %}
-		</div>
-
-		<i class="fa-solid fa-chevron-right freccia4"></i>
-	</div>
+<h2>Porte-clés</h2>
+{% include 'produits/_collection.html.twig' with {
+    produits: produits,
+    category: 'pendentifFleur'
+} %}
 {% endblock %}

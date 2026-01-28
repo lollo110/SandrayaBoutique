@@ -86,33 +86,37 @@ setInterval(() => {
 
 const leftCards = document.querySelector(".freccia3");
 const rightCards = document.querySelector(".freccia4");
-const containerCards = document.querySelector(".carte-container");
 
 let indexCards = 0;
 
-const cards = document.querySelectorAll(".carte");
-const totalCards = cards.length;
-const visibleCards = 3;
-const maxIndexCards = totalCards - visibleCards;
+document.querySelectorAll(".collection").forEach(collection => {
+    const left = collection.querySelector(".freccia3");
+    const right = collection.querySelector(".freccia4");
+    const container = collection.querySelector(".carte-container");
+    const cards = collection.querySelectorAll(".carte");
 
-function updateSlideCards() {
-    if (!containerCards) return;
-    const width = containerCards.querySelector(".carte").clientWidth;
-    containerCards.style.transform = `translateX(-${indexCards * width}px)`;
-    containerCards.style.transition = "2s ease";
-}
+    if (!left || !right || !container || cards.length === 0) return;
 
-if (leftCards && rightCards) {
-    rightCards.addEventListener("click", () => {
-        indexCards = indexCards < maxIndexCards ? indexCards + 1 : 0;
-        updateSlideCards();
+    let index = 0;
+    const visibleCards = 3;
+    const maxIndex = cards.length - visibleCards;
+
+    function updateSlide() {
+        const width = cards[0].clientWidth;
+        container.style.transform = `translateX(-${index * width}px)`;
+        container.style.transition = "0.6s ease";
+    }
+
+    right.addEventListener("click", () => {
+        index = index < maxIndex ? index + 1 : 0;
+        updateSlide();
     });
 
-    leftCards.addEventListener("click", () => {
-        indexCards = indexCards > 0 ? indexCards - 1 : maxIndexCards;
-        updateSlideCards();
+    left.addEventListener("click", () => {
+        index = index > 0 ? index - 1 : maxIndex;
+        updateSlide();
     });
-}
+});
 
 // PRODUIT BANNER ---------------------------------------------------
 
