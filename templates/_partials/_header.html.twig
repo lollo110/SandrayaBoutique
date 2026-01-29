@@ -77,7 +77,10 @@
 		<div class="navBar">
 			<a href="{{path('app_home')}}">Accueil</a>
 			<a href="{{path('app_produits')}}">Produits</a>
-			<a href="">Marque-page</a>
+			{% if app.user %}
+			<a href="{{path('app_profil')}}">Profil</a>
+				
+			{% endif %}
 		</div>
 	</div>
 </header>

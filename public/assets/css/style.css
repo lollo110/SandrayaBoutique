@@ -376,7 +376,7 @@ form button:hover {
     text-align: center;
 }
 .exa img {
-    width: 80%;
+    width: 60%;
     height: 100%;
 }
 .freccia,
@@ -575,5 +575,53 @@ form button:hover {
     position: absolute;
     bottom: 10%;
     font-size: 3em;
+}
+
+/* PAGE PROFIL */
+
+.profile{
+    width: 50%;
+    margin: 0 auto 10% auto;
+    background-color: white;
+    box-shadow: 1px 1px 10px #e79ebd;
+    padding: 10px;
+    border-radius: 10px;
+
+
+}
+
+.profile ul{
+    list-style: none;
+
+}
+
+.profile ul li {
+    margin: 10px 0;
+}
+
+.button{
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile a {
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: #1a2e25;
+    box-shadow: 1px 1px 10px #e79ebd;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+}
+
+.profile a:hover {
+    background-color: #e79ebd;
+    color: #1a2e25;
+}
+
+.profile h2{
+    text-align: center;
 }
 

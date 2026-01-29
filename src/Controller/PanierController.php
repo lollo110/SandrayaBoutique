@@ -10,15 +10,46 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\Commandes;
+use App\Entity\Users;
+use App\Entity\DetailsCommandes;
+use App\Entity\Paiements;
+use App\Enum\Paiement;
+use App\Enum\Statut;
+use App\Enum\StatutPaiement;
+use Doctrine\ORM\EntityManagerInterface;
 
 final class PanierController extends AbstractController
 {
     #[Route('/panier', name: 'app_panier')]
-    public function index(): Response
+    public function index(SessionInterface $session, ProduitsRepository $repo): Response
     {
-        return $this->render('panier/index.html.twig', [
-            'controller_name' => 'PanierController',
-        ]);
+        $cart = $session->get('cart', []);
+
+    $items = [];
+    $total = 0;
+
+    foreach ($cart as $id => $qty) {
+        $produit = $repo->find($id);
+        if (!$produit) {
+            continue;
+        }
+
+        $itemTotal = $produit->getPrix() * $qty;
+        $total += $itemTotal;
+
+        $items[] = [
+            'produit' => $produit,
+            'qty' => $qty,
+            'total' => $itemTotal,
+            'image' => $produit->getProduitsImages()->first()?->getImage()
+        ];
+    }
+
+    return $this->render('panier/index.html.twig', [
+        'items' => $items,
+        'total' => $total
+    ]);
     }
 
 
@@ -116,4 +147,80 @@ public function getPanier(SessionInterface $session, ProduitsRepository $repo): 
 
     return new JsonResponse(['items' => $items]);
 }
+
+#[Route('/panier/finaliser', name: 'app_panier_finaliser', methods: ['POST'])]
+public function finaliserCommande(
+    SessionInterface $session,
+    ProduitsRepository $produitRepo,
+    EntityManagerInterface $em
+): Response {
+
+    /**
+     * @var  Users $user
+     */
+    $user = $this->getUser();
+
+    if (!$user) {
+        return $this->redirectToRoute('app_login');
+    }
+
+    $cart = $session->get('cart', []);
+    if (empty($cart)) {
+        return $this->redirectToRoute('app_panier');
+    }
+
+    // 🧾 Création commande
+    $commande = new Commandes();
+    $commande->setIdUser($user);
+    $commande->setStatut(Statut::ENATTENTE); // ou EN_ATTENTE
+    $commande->setAddLivraison($user->getAddLivraison()); // adapte si besoin
+
+    $total = 0;
+
+    foreach ($cart as $idProduit => $quantite) {
+        $produit = $produitRepo->find($idProduit);
+        if (!$produit) continue;
+
+        $details = new DetailsCommandes();
+        $details->setIdCommande($commande);
+        $details->setIdProduit($produit);
+        $details->setQuantite($quantite);
+        $details->setPrix($produit->getPrix());
+
+        $total += $produit->getPrix() * $quantite;
+
+        $em->persist($details);
+    }
+
+    $paiement = new Paiements();
+$paiement->setMontant($total);
+$paiement->setModePaiement(Paiement::CARTE);
+$paiement->setStatut(StatutPaiement::ENATTENTE);
+
+$commande->setPaiements($paiement);
+
+    $commande->setTotal($total);
+
+    $em->persist($paiement);
+
+    $em->persist($commande);
+    $em->flush();
+
+    // 🧹 Vider le panier
+    $session->remove('cart');
+
+    return $this->redirectToRoute('app_panier_success', [
+        'id' => $commande->getId(),
+    ]);
+}
+
+#[Route('/panier/success/{id}', name: 'app_panier_success')]
+public function success(Commandes $commande): Response
+{
+    return $this->render('panier/success.html.twig', [
+        'commande' => $commande,
+        
+    ]);
+}
+
 }

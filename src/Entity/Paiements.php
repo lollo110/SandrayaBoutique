@@ -27,7 +27,7 @@ class Paiements
     #[ORM\Column]
     private ?\DateTime $date_paiement = null;
 
-    #[ORM\OneToOne(inversedBy: 'Paiements', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'paiements', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Commandes $commande = null;
 
@@ -88,12 +88,12 @@ class Paiements
 
     }
 
-    public function getIdCommande(): ?Commandes
+    public function getCommande(): ?Commandes
     {
         return $this->commande;
     }
 
-    public function setIdCommande(Commandes $commande): static
+    public function setCommande(Commandes $commande): static
     {
         $this->commande = $commande;
 

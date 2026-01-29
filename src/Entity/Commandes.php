@@ -28,17 +28,17 @@ class Commandes
     #[ORM\Column(length: 255)]
     private ?string $add_livraison = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Commandes')]
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?users $user = null;
+    private ?Users $user = null;
 
     /**
      * @var Collection<int, DetailsCommandes>
      */
-    #[ORM\OneToMany(targetEntity: DetailsCommandes::class, mappedBy: 'Commandes')]
+    #[ORM\OneToMany(targetEntity: DetailsCommandes::class, mappedBy: 'commandes')]
     private Collection $detailsCommandes;
 
-    #[ORM\OneToOne(mappedBy: 'Commandes', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'commande', cascade: ['persist', 'remove'])]
     private ?Paiements $paiements = null;
 
     public function __construct()
@@ -151,8 +151,8 @@ class Commandes
     public function setPaiements(Paiements $paiements): static
     {
         // set the owning side of the relation if necessary
-        if ($paiements->getIdCommande() !== $this) {
-            $paiements->setIdCommande($this);
+        if ($paiements->getCommande() !== $this) {
+            $paiements->setCommande($this);
         }
 
         $this->paiements = $paiements;

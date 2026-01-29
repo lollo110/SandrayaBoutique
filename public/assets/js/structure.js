@@ -276,10 +276,10 @@ if (plus) {
 const checkoutBtn = document.getElementById("checkout-btn");
 const clearCartBtn = document.getElementById("clear-cart-btn");
 
-// // Rediriger vers la page checkout
-// checkoutBtn.addEventListener("click", () => {
-//     window.location.href = "/checkout"; // Change selon ta route Symfony
-// });
+// Rediriger vers la page checkout
+checkoutBtn.addEventListener("click", () => {
+    window.location.href = "/panier"; // Change selon ta route Symfony
+});
 
 clearCartBtn.addEventListener("click", async () => {
     try {

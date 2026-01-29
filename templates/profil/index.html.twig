@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfilController!
+{% endblock %}
+
+{% block body %}
+	<h1>Profil de
+		{{ user.username }}</h1>
+
+
+	<div class="profile">
+    <div class="info">
+		<h2>Informations personnelles</h2>
+		<ul>
+			<li>
+				<strong>Nom :</strong>
+				{{ user.nom }}
+                </li>
+			<li>
+				<strong>Prénom :</strong>
+				{{ user.prenom }}</li>
+			<li>
+				<strong>Email :</strong>
+				{{ user.email }}</li>
+			<li>
+				<strong>Portable :</strong>
+				{{ user.portable }}</li>
+			<li>
+				<strong>Date d'inscription :</strong>
+				{{ user.dateInscription|date('d/m/Y') }}</li>
+			<li>
+				<strong>Adresse:</strong>
+				{{ user.addLivraison }}</li>
+			<li>
+				<strong>Ville :</strong>
+				{{ user.ville }}</li>
+			<li>
+				<strong>Code Postal</strong>
+				{{ user.codePostal }}</li>
+		</ul>
+
+		<div class="button">
+
+			<form action="{{ path('app_profil_modif') }}" method="post">
+				<button type="submit">
+					Modifier Profil
+				</button>
+			</form>
+
+			<form action="{{ path('profilo_delete') }}" method="post">
+				<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+				<button type="submit" onclick="return confirm('Vous etes sûr de vouloir supprimer votre profil ? Cette action est irréversible.');">
+					Supprimer Profil
+				</button>
+			</form>
+		</div>
+	</div>
+    
+    {# <div class="commande">
+    <h2>Historique des commandes</h2>
+    {% if commandes is empty %}
+        <p>Aucune commande passée.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Numéro de commande</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for commande in commandes %}
+                    <tr>
+                        <td>{{ commande.id }}</td>
+                        <td>{{ commande.dateCommande|date('d/m/Y') }}</td>
+                        <td>{{ commande.total }} €</td>
+                        <td>{{ commande.status }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    </div> #}
+    </div>
+{% endblock %}

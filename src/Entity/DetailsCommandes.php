@@ -19,11 +19,11 @@ class DetailsCommandes
     #[ORM\Column]
     private ?float $prix = null;
 
-    #[ORM\ManyToOne(inversedBy: 'DetailsCommandes')]
+    #[ORM\ManyToOne(inversedBy: 'detailsCommandes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Commandes $commande = null;
 
-    #[ORM\ManyToOne(inversedBy: 'DetailsCommandes')]
+    #[ORM\ManyToOne(inversedBy: 'detailsCommandes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Produits $produit = null;
 

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<h1>Commande validée ✅</h1>
+
+<p>Numéro de commande : {{ commande.id }}</p>
+<p>Total : {{ commande.total }} €</p>
+<p>Statut : {{ commande.statut.value }}</p>
+
+{% endblock %}
