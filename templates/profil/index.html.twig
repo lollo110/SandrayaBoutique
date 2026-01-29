@@ -56,7 +56,8 @@
 		</div>
 	</div>
     
-    {# <div class="commande">
+    
+    <div class="commande">
     <h2>Historique des commandes</h2>
     {% if commandes is empty %}
         <p>Aucune commande passée.</p>
@@ -76,12 +77,12 @@
                         <td>{{ commande.id }}</td>
                         <td>{{ commande.dateCommande|date('d/m/Y') }}</td>
                         <td>{{ commande.total }} €</td>
-                        <td>{{ commande.status }}</td>
+                        <td>{{ commande.statut.value }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     {% endif %}
-    </div> #}
+    </div>
     </div>
 {% endblock %}

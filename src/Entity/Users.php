@@ -63,19 +63,19 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Commandes>
      */
-    #[ORM\OneToMany(targetEntity: Commandes::class, mappedBy: 'Users')]
+    #[ORM\OneToMany(targetEntity: Commandes::class, mappedBy: 'user')]
     private Collection $commandes;
 
     /**
      * @var Collection<int, Avis>
      */
-    #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'Users')]
+    #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'user')]
     private Collection $avis;
 
     /**
      * @var Collection<int, Favoris>
      */
-    #[ORM\OneToMany(targetEntity: Favoris::class, mappedBy: 'Users')]
+    #[ORM\OneToMany(targetEntity: Favoris::class, mappedBy: 'users')]
     private Collection $favoris;
 
     public function __construct()

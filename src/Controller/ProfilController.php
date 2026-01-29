@@ -20,11 +20,17 @@ final class ProfilController extends AbstractController
     public function index(UsersRepository $usersRepository): Response
     {
         $user = $usersRepository->find($this->getUser());
+
+        if (!$user) {
+            throw $this->createNotFoundException('Utilisateur non trouvé.');
+        }
         $commandes = $user->getCommandes();
+        
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',
             'user' => $user,
-            'commandes' => $commandes
+            'commandes' => $commandes,
+            
         ]);
     }
 
