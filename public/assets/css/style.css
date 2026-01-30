@@ -17,6 +17,10 @@ body {
     overflow-x: hidden;
 }
 
+h2{
+    text-align: center;
+}
+
 button{
     
     background-color: #fff;
