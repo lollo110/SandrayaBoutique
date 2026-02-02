@@ -306,7 +306,7 @@ footer p {
 
 #form-register {
     width: 20%;
-    margin: 10px auto;
+    margin: 0 auto;
 }
 
 form label {
@@ -357,7 +357,7 @@ form button:hover {
 
 #form-login {
     width: 20%;
-    margin: 6% auto;
+    margin: 0 auto;
 }
 
 /* Carousel Big */
@@ -382,6 +382,7 @@ form button:hover {
 .exa img {
     width: 60%;
     height: 100%;
+    box-shadow:  1px 1px 30px #e79ebd;
 }
 .freccia,
 .freccia2,
@@ -629,3 +630,12 @@ form button:hover {
     text-align: center;
 }
 
+
+
+/* CANVAS */
+
+canvas.stitch-title {
+      width: 100%;
+      height: 200px;
+      display: block;
+    }

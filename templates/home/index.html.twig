@@ -1,26 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
-
-{% block body %}
-    <h1>Accueil</h1>
-    <div class="carousel">
-            <i class="fa-solid fa-chevron-left freccia"></i>
-            <div class="contImage">
-            <div class="exa">
-                <img src="{{asset('assets/uploads/carosello.png')}}" alt="">
-            </div>
-            <div class="exa">
-            <img src="{{asset('assets/uploads/strada.png')}}" alt="">
-            </div>
-            <div class="exa">
-                <img src="{{asset('assets/uploads/venditaCasa.png')}}" alt="">
-            </div>
-            <div class="exa">
-                <img src="{{asset('assets/uploads/mercatino.png')}}" alt="">
-            </div>
-            </div>
-            <i class="fa-solid fa-chevron-right freccia2"></i>
-        </div>
+{% block title %}Hello HomeController!
 {% endblock %}
 
+{% block body %}
+	<h1><canvas class="stitch-title" data-text="1CCUEIL"></canvas></h1>
+	<div class="carousel">
+		<i class="fa-solid fa-chevron-left freccia"></i>
+		<div class="contImage">
+			<div class="exa">
+				<img src="{{asset('assets/uploads/carosello.png')}}" alt="">
+			</div>
+			<div class="exa">
+				<img src="{{asset('assets/uploads/strada.png')}}" alt="">
+			</div>
+			<div class="exa">
+				<img src="{{asset('assets/uploads/venditaCasa.png')}}" alt="">
+			</div>
+			<div class="exa">
+				<img src="{{asset('assets/uploads/mercatino.png')}}" alt="">
+			</div>
+		</div>
+		<i class="fa-solid fa-chevron-right freccia2"></i>
+	</div>
+	
+{% endblock %}
