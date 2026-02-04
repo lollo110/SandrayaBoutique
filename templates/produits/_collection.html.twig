@@ -6,7 +6,7 @@
             {% if produit.category == category %}
                 <div class="carte">
                     <i class="fa-solid fa-plus addToCart" id="{{ produit.id }}"></i>
-
+                    <i class="{{ produit.id in favorisIds ? 'fa-solid' : 'fa-regular' }} fa-star favoris" id="{{ produit.id }}"></i>
                     <div class="img">
                         {% for produitImage in produit.produitsImages %}
                             <img src="{{ asset('assets/uploads/cornice-rune.png') }}" class="cornice" />

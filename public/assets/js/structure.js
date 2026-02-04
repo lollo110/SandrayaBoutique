@@ -262,7 +262,7 @@ if (plus) {
     plus.forEach((button) => {
         button.addEventListener("click", async () => {
             try {
-                await addToCart(button.id, 1); // aggiunge 1 prodotto
+                await addToCart(button.id, 1);
                 showCartMessage("Produit ajouté au panier !");
             } catch (error) {
                 console.error("Erreur lors de l'ajout au panier:", error);
@@ -270,6 +270,21 @@ if (plus) {
         });
     });
 }
+
+let ajoutFavoris = document.querySelectorAll(".addToCart-favoris");
+if (ajoutFavoris) {
+    ajoutFavoris.forEach((button) => {
+        button.addEventListener("click", async () => {
+            try {
+                await addToCart(button.id, 1);
+                showCartMessage("Produit ajouté au panier !");
+            } catch (error) {
+                console.error("Erreur lors de l'ajout au panier:", error);
+            }
+        });
+    });
+}
+
 
 
 
@@ -443,6 +458,67 @@ function showCartMessage(msg) {
     }, 2000);
 }
 
+// FAVORIS -----------------------------------------------
 
+document.querySelectorAll('.favoris').forEach(icon => {
+
+    icon.addEventListener('click', function () {
+
+        const produitId = this.id;
+
+        fetch(`/favoris/${produitId}`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            if (!data.success) {
+                alert(data.message ?? 'Erreur');
+                return;
+            }
+
+            if (data.action === 'added') {
+                this.classList.remove('fa-regular');
+                this.classList.add('fa-solid');
+            }
+
+            if (data.action === 'removed') {
+                this.classList.remove('fa-solid');
+                this.classList.add('fa-regular');
+            }
+
+        })
+        .catch(err => console.error(err));
+    });
+
+});
+
+document.querySelectorAll('.supprimer-favoris').forEach(button => {
+    button.addEventListener('click', function() {
+        const favoriId = this.id;
+
+        if (!confirm('Voulez-vous vraiment supprimer ce favori ?')) return;
+
+        fetch(`/favoris/supprimer/${favoriId}`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const row = document.getElementById(`favori-${favoriId}`);
+                if (row) row.remove();
+            } else {
+                alert(data.message ?? 'Erreur');
+            }
+        })
+        .catch(err => console.error(err));
+    });
+});
 
 

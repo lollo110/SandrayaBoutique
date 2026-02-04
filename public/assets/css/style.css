@@ -17,12 +17,11 @@ body {
     overflow-x: hidden;
 }
 
-h2{
+h2 {
     text-align: center;
 }
 
-button{
-    
+button {
     background-color: #fff;
     padding: 10px 20px;
     border-radius: 10px;
@@ -122,7 +121,9 @@ button:hover {
     font-size: 1.2em;
     text-align: end;
 
-    transition: opacity 1s ease, transform 1s ease;
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
 }
 .showPanier {
     position: fixed;
@@ -143,18 +144,19 @@ button:hover {
     display: flex;
     flex-direction: column;
 
-
-    transition: opacity 1s ease, transform 1s ease;
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
 }
 
-
-.remove-btn, .add-one-btn{
+.remove-btn,
+.add-one-btn {
     font-size: 1.5em;
 }
-.showPanier #panier-list{
+.showPanier #panier-list {
     flex: 1;
-    list-style: none;               
-    overflow-y: auto;      
+    list-style: none;
+    overflow-y: auto;
     padding: 10px;
     margin: 0;
 }
@@ -167,7 +169,7 @@ button:hover {
     border-radius: 10px;
 }
 
-#panier-list li{
+#panier-list li {
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -179,10 +181,9 @@ button:hover {
     flex-direction: column;
 }
 
-.imgPanier{
+.imgPanier {
     width: 50%;
 }
-
 
 #panier-total,
 #cart-actions {
@@ -190,11 +191,9 @@ button:hover {
     border-top: 1px solid #eee;
 }
 
-
 .imgPanier img {
     width: 100%;
-} 
-
+}
 
 .active {
     opacity: 1;
@@ -230,7 +229,7 @@ button:hover {
     transition: transform 0.7s ease-in-out;
 }
 
-.show a:hover::after{
+.show a:hover::after {
     transform: scaleX(1);
     transform-origin: left;
 }
@@ -247,8 +246,8 @@ footer {
 .footer {
     display: flex;
     justify-content: space-between;
-    text-align: center; 
-    margin: 0 2%;   
+    text-align: center;
+    margin: 0 2%;
 }
 
 .footer div {
@@ -275,8 +274,7 @@ footer a::after {
     transition: transform 0.7s ease-in-out;
 }
 
-footer a:hover::after
- {
+footer a:hover::after {
     transform: scaleX(1);
     transform-origin: left;
 }
@@ -294,11 +292,11 @@ footer p {
     text-align: center;
 }
 
-.footer-little img{
+.footer-little img {
     width: 80%;
 }
 
-.hide{
+.hide {
     position: relative;
     z-index: 1;
 }
@@ -382,7 +380,7 @@ form button:hover {
 .exa img {
     width: 60%;
     height: 100%;
-    box-shadow:  1px 1px 30px #e79ebd;
+    box-shadow: 1px 1px 30px #e79ebd;
 }
 .freccia,
 .freccia2,
@@ -404,7 +402,7 @@ form button:hover {
     left: 50%;
     text-align: center;
     transform: translateX(-50%);
-    background: #4CAF50;
+    background: #4caf50;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -416,7 +414,7 @@ form button:hover {
     opacity: 1;
 }
 
-.produitBanner{
+.produitBanner {
     display: flex;
     width: 100%;
     align-items: center;
@@ -426,37 +424,35 @@ form button:hover {
     z-index: -1;
 }
 
-.littleBanner{
+.littleBanner {
     width: 50%;
     transition: all 2s ease-in-out;
     opacity: 0;
-    
 }
 
-.littleBanner:first-child{
+.littleBanner:first-child {
     transform: translateX(110%);
 }
 
-.littleBanner:last-child{
+.littleBanner:last-child {
     transform: translateX(-110%);
 }
 
-.produitBanner.visible .littleBanner{
+.produitBanner.visible .littleBanner {
     opacity: 1;
     transform: translateX(0);
 }
 
-.littleBanner img{
+.littleBanner img {
     width: 75%;
     margin: auto;
 }
 
-.littleBanner p{
+.littleBanner p {
     width: 50%;
     margin: auto;
     font-size: 1.5em;
 }
-
 
 .collection {
     display: flex;
@@ -479,7 +475,7 @@ form button:hover {
     height: 60vh;
 }
 
-.carte i{
+.addToCart {
     background-color: #e79ebd;
     padding: 4px;
     border-radius: 50%;
@@ -492,9 +488,8 @@ form button:hover {
     cursor: pointer;
 }
 
-.img{
+.img {
     transition: all 2s ease-in-out;
-
 }
 
 .cornice {
@@ -515,7 +510,7 @@ form button:hover {
     border: solid 3px #ffffff;
 }
 
-.text{
+.text {
     position: absolute;
     bottom: 22%;
     left: 50%;
@@ -524,10 +519,9 @@ form button:hover {
     width: 40%;
 }
 
-
 /* DetailProduit */
 
-.sin img{
+.sin img {
     width: 100%;
     height: 50vh;
 }
@@ -542,29 +536,28 @@ form button:hover {
     border: 1px solid;
 }
 
-.sin{
+.sin {
     width: 50%;
     text-align: right;
 }
-.dest{
+.dest {
     width: 100%;
 }
 
-.imgPicco{
+.imgPicco {
     display: flex;
     justify-content: space-between;
     gap: 2%;
 }
 
-.imgPicco img{
+.imgPicco img {
     height: 10vh;
-
 }
 
-.description{
+.description {
     width: 100%;
 }
-.quantite-select{
+.quantite-select {
     display: flex;
     align-items: center;
     position: absolute;
@@ -572,11 +565,11 @@ form button:hover {
     right: 2%;
 }
 
-.quantite-select input{
+.quantite-select input {
     padding: 5px;
 }
 
-.prix-total-display{
+.prix-total-display {
     position: absolute;
     bottom: 10%;
     font-size: 3em;
@@ -584,27 +577,24 @@ form button:hover {
 
 /* PAGE PROFIL */
 
-.profile{
+.profile {
     width: 50%;
     margin: 0 auto 10% auto;
     background-color: white;
     box-shadow: 1px 1px 10px #e79ebd;
     padding: 10px;
     border-radius: 10px;
-
-
 }
 
-.profile ul{
+.profile ul {
     list-style: none;
-
 }
 
 .profile ul li {
     margin: 10px 0;
 }
 
-.button{
+.button {
     display: flex;
     justify-content: space-around;
 }
@@ -626,16 +616,28 @@ form button:hover {
     color: #1a2e25;
 }
 
-.profile h2{
+.profile h2 {
     text-align: center;
 }
-
-
 
 /* CANVAS */
 
 canvas.stitch-title {
-      width: 100%;
-      height: 200px;
-      display: block;
-    }
+    width: 100%;
+    height: 200px;
+    display: block;
+}
+
+.favoris {
+    background-color: #e79ebd;
+    position: absolute;
+    padding: 2.5px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 2em;
+    cursor: pointer;
+    top: 2%;
+    left: 30%;
+}
+
