@@ -3,6 +3,18 @@
 		<div class="icone">
 			<i class="fa-solid fa-cart-shopping" id="panier"></i>
 			<i class="fa-solid fa-user" id="omino"></i>
+			<i class="fa-solid fa-bars" id="hamburger"></i>
+
+            <div class="hamburger-menu" id="hamburger-menu">
+                <ul>
+                    <li><a href="{{path('app_home')}}">Accueil</a></li>
+                    <li><a href="{{path('app_produits')}}">Produits</a></li>
+                    {% if app.user %}
+                        <li><a href="{{path('app_profil')}}">Profil</a></li>
+                        <li><a href="{{path('app_favoris_list')}}">Mes Favoris</a></li>
+                    {% endif %}
+                </ul>
+            </div>
 			<div class="showPanier">
 				<ul id="panier-list">
 					{% for item in cartItems %}

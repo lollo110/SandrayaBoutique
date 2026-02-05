@@ -98,7 +98,7 @@ document.querySelectorAll(".collection").forEach(collection => {
     if (!left || !right || !container || cards.length === 0) return;
 
     let index = 0;
-    const visibleCards = 3;
+    const visibleCards = window.innerWidth < 425 ? 1 : 3;
     const maxIndex = cards.length - visibleCards;
 
     function updateSlide() {
@@ -521,4 +521,18 @@ document.querySelectorAll('.supprimer-favoris').forEach(button => {
     });
 });
 
+// Hamburger manu -----------------------------------------------
+const hamburger = document.getElementById('hamburger');
+const hamburgerMenu = document.getElementById('hamburger-menu');
+
+hamburger.addEventListener('click', () => {
+    hamburgerMenu.classList.toggle('open');
+});
+
+// Chiudi il menu se clicchi fuori
+document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !hamburgerMenu.contains(e.target)) {
+        hamburgerMenu.classList.remove('open');
+    }
+});
 

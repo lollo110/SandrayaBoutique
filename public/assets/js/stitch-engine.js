@@ -2,7 +2,7 @@ const SPEED = 0.08;
 const isMobile = window.innerWidth < 920;
 const LINE_SCALE = isMobile ? 0.5 : 2;
 const STITCHES_PER_FRAME = isMobile ? 5 : 10;
-const STITCH_SCALE = 0.35;
+const STITCH_SCALE = 0.45;
 const STITCH_OVERLAP = 0.15;
 
 class Cucito {

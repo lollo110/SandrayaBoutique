@@ -42,7 +42,7 @@ button:hover {
 .titre {
     text-align: center;
     position: relative;
-    margin-top: 2%;
+    margin-top: 5%;
     z-index: -1;
 }
 .titre :nth-child(3) {
@@ -52,6 +52,10 @@ button:hover {
     top: 0;
     pointer-events: none;
     z-index: -1;
+}
+
+.titre :nth-child(2) {
+    width: 20%;
 }
 .titre :nth-child(1) {
     position: absolute;
@@ -436,6 +440,7 @@ form button:hover {
 
 .littleBanner:last-child {
     transform: translateX(-110%);
+    text-align: center;
 }
 
 .produitBanner.visible .littleBanner {
@@ -444,14 +449,13 @@ form button:hover {
 }
 
 .littleBanner img {
-    width: 75%;
+    width: 50%;
     margin: auto;
 }
 
 .littleBanner p {
     width: 50%;
     margin: auto;
-    font-size: 1.5em;
 }
 
 .collection {
@@ -641,3 +645,60 @@ canvas.stitch-title {
     left: 30%;
 }
 
+/* hamburger toggle */
+
+.hamburger-menu {
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    background-color: #ccb089;
+    padding: 10px;
+    width: 200px;
+    min-height: 200px;
+}
+
+.hamburger-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hamburger-menu li {
+    margin: 10px 0;
+}
+
+.hamburger-menu a {
+    text-decoration: none;
+    color: #000;
+}
+
+
+.hamburger-menu.open {
+    display: block;
+    z-index: 99999;
+}
+
+
+#hamburger {
+    cursor: pointer;
+    display: none;
+    margin-left: 10px;
+    position: absolute;
+    left: 0;
+}
+
+@media (max-width: 768px) {
+    .navBar {
+        display: none;
+    }
+    #hamburger {
+        display: inline-block;
+}
+}
+
+@media (max-width: 425px) {
+    .carte{
+        min-width: 100%;
+    }
+}
