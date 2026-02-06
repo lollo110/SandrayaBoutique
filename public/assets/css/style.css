@@ -819,4 +819,24 @@ canvas.stitch-title {
     .footer-little:nth-child(2) {
         margin-top: 50px;
     }
+
+    /* Page Produits */
+
+    .produitBanner {
+        margin-top: 5vh;
+        flex-direction: column-reverse;  
+    }
+    .littleBanner{
+        width: 100%;
+    }
+
+    .littleBanner img {
+        width: 70%;
+    }
+
+    .littleBanner p {
+        width: 90%;
+        text-align: justify;
+        font-size: 0.9em;
+    }
 }
