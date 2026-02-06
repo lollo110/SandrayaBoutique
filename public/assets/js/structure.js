@@ -2,9 +2,14 @@
 let omino = document.getElementById("omino");
 let panier = document.getElementById("panier");
 let collection = document.querySelector(".collection");
+let closePanier = document.getElementById("close-panier");
 
 let show = document.querySelector(".show");
 let showPanier = document.querySelector(".showPanier");
+
+closePanier.addEventListener("click", function (e) {
+    showPanier.classList.remove("active2");
+});
 
 showPanier.addEventListener("click", function (e) {
     e.stopPropagation();
@@ -46,8 +51,7 @@ window.addEventListener("click", function () {
 
 // CAROUSEL IMAGES ---------------------------------------------
 
-const left = document.querySelector(".freccia");
-const right = document.querySelector(".freccia2");
+
 const container = document.querySelector(".contImage");
 
 let indexImages = 0;
@@ -63,18 +67,6 @@ function updateSlide() {
     container.style.transform = `translateX(-${indexImages * width}px)`;
     container.style.transition = "2s ease";
     container.style.zIndex = " -1";
-}
-
-if (left && right) {
-    right.addEventListener("click", () => {
-        indexImages = indexImages < maxIndexImages ? indexImages + 1 : 0;
-        updateSlide();
-    });
-
-    left.addEventListener("click", () => {
-        indexImages = indexImages > 0 ? indexImages - 1 : maxIndexImages;
-        updateSlide();
-    });
 }
 
 setInterval(() => {
@@ -529,10 +521,20 @@ hamburger.addEventListener('click', () => {
     hamburgerMenu.classList.toggle('open');
 });
 
-// Chiudi il menu se clicchi fuori
+
 document.addEventListener('click', (e) => {
     if (!hamburger.contains(e.target) && !hamburgerMenu.contains(e.target)) {
         hamburgerMenu.classList.remove('open');
     }
+});
+
+// footer toggle -------------------------------------------------
+
+document.querySelectorAll('.footer-little h3').forEach(title => {
+    title.addEventListener('click', () => {
+        const parent = title.parentElement;
+
+        parent.classList.toggle('active');
+    });
 });
 

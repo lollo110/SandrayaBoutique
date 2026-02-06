@@ -1,4 +1,13 @@
-// sicurezza: controlliamo che tutto esista
+function getResponsiveSize() {
+  const w = window.innerWidth;
+
+  if (w < 400) return 5;
+  if (w < 600) return 6;
+  if (w < 900) return 8;
+  return 10;
+}
+
+
 if (
   !window.STITCH_FONT ||
   !window.STITCH_PALETTES ||
@@ -12,16 +21,23 @@ if (
     const ctx = canvas.getContext("2d");
 
     const text = (canvas.dataset.text || "").toUpperCase();
-    const size = 10;
+    let size = getResponsiveSize();
     const paletteName = canvas.dataset.palette || "rose";
     const palette = window.STITCH_PALETTES[paletteName];
 
     let patterns = [];
 
     function resize() {
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight || size * 6;
-    }
+  canvas.width = canvas.clientWidth;
+
+  size = getResponsiveSize();
+
+  canvas.height =
+    window.patternHeight(
+      window.STITCH_FONT[text[0]],
+      size
+    ) + size * 2;
+}
 
     function build() {
       patterns = [];

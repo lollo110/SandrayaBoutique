@@ -47,7 +47,7 @@ button:hover {
 }
 .titre :nth-child(3) {
     position: absolute;
-    width: 25%;
+    width: 35%;
     right: 0;
     top: 0;
     pointer-events: none;
@@ -55,11 +55,11 @@ button:hover {
 }
 
 .titre :nth-child(2) {
-    width: 20%;
+    width: 40%;
 }
 .titre :nth-child(1) {
     position: absolute;
-    width: 25%;
+    width: 35%;
     left: 0;
     z-index: -1;
     transform: rotateY(180deg);
@@ -121,7 +121,7 @@ button:hover {
     opacity: 0;
     transform: translateY(-20px);
     pointer-events: none;
-    width: 10%;
+    width: 15%;
     font-size: 1.2em;
     text-align: end;
 
@@ -165,6 +165,12 @@ button:hover {
     margin: 0;
 }
 
+.showPanier i {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
 #panier-list::-webkit-scrollbar {
     width: 6px;
 }
@@ -187,6 +193,7 @@ button:hover {
 
 .imgPanier {
     width: 50%;
+    text-align: center;
 }
 
 #panier-total,
@@ -628,7 +635,7 @@ form button:hover {
 
 canvas.stitch-title {
     width: 100%;
-    height: 200px;
+    height: 100px;
     display: block;
 }
 
@@ -645,17 +652,25 @@ canvas.stitch-title {
     left: 30%;
 }
 
-/* hamburger toggle */
+/* hamburger menu */
 
 .hamburger-menu {
-    display: none;
     position: absolute;
-    top: 20%;
+    top: 5vh;
     left: 0;
     background-color: #ccb089;
     padding: 10px;
     width: 200px;
-    min-height: 200px;
+    text-align: start;
+    border-radius: 0 0 20px 0;
+    opacity: 0;
+    transform: translateY(-20px);
+    visibility: hidden;
+    font-size: 1.2em;
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
 }
 
 .hamburger-menu ul {
@@ -664,21 +679,18 @@ canvas.stitch-title {
     margin: 0;
 }
 
-.hamburger-menu li {
-    margin: 10px 0;
-}
-
 .hamburger-menu a {
     text-decoration: none;
     color: #000;
 }
 
-
 .hamburger-menu.open {
     display: block;
     z-index: 99999;
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
 }
-
 
 #hamburger {
     cursor: pointer;
@@ -686,19 +698,125 @@ canvas.stitch-title {
     margin-left: 10px;
     position: absolute;
     left: 0;
+    top: 10px;
 }
-
+/* Media query portable */
 @media (max-width: 768px) {
+    /* Header */
+
     .navBar {
         display: none;
     }
     #hamburger {
-        display: inline-block;
-}
+        display: block;
+    }
+
+    .show {
+        width: 30%;
+        top: 10vh;
+    }
+
+    /* Footer */
+
+    .footer {
+        font-size: 0.8em;
+    }
 }
 
+/* Media query portable */
+
 @media (max-width: 425px) {
-    .carte{
+    .carte {
         min-width: 100%;
+    }
+
+    /* Canvas */
+    canvas.stitch-title {
+        height: 70px;
+    }
+
+    /* Header */
+    .show {
+        top: 5vh;
+        width: 50%;
+    }
+
+    .showPanier {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 90vh;
+        font-size: 0.8em;
+    }
+
+    .imgPanier img {
+        width: 50%;
+    }
+
+    .textPanier {
+        width: 50%;
+    }
+
+    #panier-list li {
+        margin-bottom: 20px;
+    }
+
+    .remove-btn,
+    .add-one-btn {
+        font-size: 1em;
+    }
+
+    .titre {
+        margin-top: 7vh;
+    }
+
+    .titre :nth-child(3) { 
+        width: 30%;
+    }
+
+    .titre :nth-child(2) {
+        width: 50%;
+    }
+    .titre :nth-child(1) {
+        width: 30%;
+    }
+
+    /* Footer  */
+
+    .footer {
+        flex-direction: column;
+        padding-bottom: 5%;
+        font-size: 0.8em;
+    }
+
+    .footer div {
+        width: 100%;
+    }
+
+    footer ul {
+        margin-top: 10px;
+        display: none;
+    }
+
+    .copyright {
+        padding-bottom: 5%;
+        font-size: 0.8em;
+    }
+
+    .footer-little h3::after {
+        content: "+";
+        transition: transform 0.3s;
+    }
+
+    .footer-little.active h3::after {
+        content: "-";
+    }
+
+    .footer-little.active ul {
+        display: block;
+    }
+
+    .footer-little:nth-child(2) {
+        margin-top: 50px;
     }
 }

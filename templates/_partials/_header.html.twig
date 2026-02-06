@@ -16,6 +16,7 @@
                 </ul>
             </div>
 			<div class="showPanier">
+			<i class="fa-solid fa-xmark" id="close-panier"></i>
 				<ul id="panier-list">
 					{% for item in cartItems %}
 						{% if item.qty > 0 %}
