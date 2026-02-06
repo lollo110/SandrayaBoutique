@@ -483,7 +483,7 @@ form button:hover {
     min-width: calc(100% / 3);
     text-align: center;
     position: relative;
-    height: 60vh;
+    height: 55vh;
 }
 
 .addToCart {
@@ -497,6 +497,19 @@ form button:hover {
     top: 2%;
     left: 22%;
     cursor: pointer;
+}
+
+.favoris {
+    background-color: #e79ebd;
+    position: absolute;
+    padding: 2.5px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 2em;
+    cursor: pointer;
+    top: 2%;
+    left: 30%;
 }
 
 .img {
@@ -515,7 +528,6 @@ form button:hover {
 
 .produitImage {
     width: 60%;
-    height: 40vh;
     border-radius: 20px;
     box-shadow: 1px 1px 20px #e79ebd;
     border: solid 3px #ffffff;
@@ -639,19 +651,6 @@ canvas.stitch-title {
     display: block;
 }
 
-.favoris {
-    background-color: #e79ebd;
-    position: absolute;
-    padding: 2.5px;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 2em;
-    cursor: pointer;
-    top: 2%;
-    left: 30%;
-}
-
 /* hamburger menu */
 
 .hamburger-menu {
@@ -726,10 +725,6 @@ canvas.stitch-title {
 /* Media query portable */
 
 @media (max-width: 425px) {
-    .carte {
-        min-width: 100%;
-    }
-
     /* Canvas */
     canvas.stitch-title {
         height: 70px;
@@ -770,7 +765,7 @@ canvas.stitch-title {
         margin-top: 7vh;
     }
 
-    .titre :nth-child(3) { 
+    .titre :nth-child(3) {
         width: 30%;
     }
 
@@ -824,9 +819,9 @@ canvas.stitch-title {
 
     .produitBanner {
         margin-top: 5vh;
-        flex-direction: column-reverse;  
+        flex-direction: column-reverse;
     }
-    .littleBanner{
+    .littleBanner {
         width: 100%;
     }
 
@@ -838,5 +833,44 @@ canvas.stitch-title {
         width: 90%;
         text-align: justify;
         font-size: 0.9em;
+    }
+
+    .carte {
+        min-width: 100%;
+        height: 40vh;
+    }
+
+    .cornice {
+        width: 60%;
+        height: 40%;
+        bottom: 20%;
+    }
+
+    .text {
+        font-size: 0.7em;
+        bottom: 33%;
+    }
+
+    .produitImage {
+        width: 70%;
+    }
+
+    .collection {
+        height: auto;
+    }
+
+    
+
+    .addToCart {
+        font-size: 1em;
+        width: 25px;
+        height: 25px;
+        left: 19%;
+    }
+    
+    .favoris {
+        font-size: 1em;
+        width: 25px;
+        height: 25px;
     }
 }

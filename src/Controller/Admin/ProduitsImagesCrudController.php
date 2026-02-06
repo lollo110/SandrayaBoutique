@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProduitsImagesCrudController extends AbstractCrudController
@@ -61,4 +62,20 @@ class ProduitsImagesCrudController extends AbstractCrudController
             $entityInstance->setImage($newFilename);
         }
     }
+
+    
+public function deleteEntity(EntityManagerInterface $em, $entityInstance): void
+{
+    $filesystem = new Filesystem();
+
+    if ($entityInstance->getImage()) {
+        $filePath = 'assets/uploads/' . $entityInstance->getImage();
+
+        if ($filesystem->exists($filePath)) {
+            $filesystem->remove($filePath);
+        }
+    }
+
+    parent::deleteEntity($em, $entityInstance);
+}
 }
