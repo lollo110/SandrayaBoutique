@@ -786,9 +786,10 @@ canvas.stitch-title {
     }
 
     /* Page produit */
-
-    .carte {
-        min-width: calc(100% / 2);
+    
+    .produitBanner {
+        margin-top: 5vh;
+        flex-direction: column-reverse;
     }
 
     .littleBanner {
@@ -798,6 +799,50 @@ canvas.stitch-title {
     .littleBanner img {
         width: 70%;
     }
+
+        .littleBanner p {
+        width: 90%;
+        text-align: justify;
+        font-size: 0.9em;
+    }
+
+    .carte {
+        min-width: calc(100% / 2);
+        height: auto;
+    }
+
+        .cornice {
+        width: 60%;
+        height: 60%;
+        bottom: -15%;
+    }
+
+    .text {
+        font-size: 0.7em;
+        bottom: 5%;
+    }
+
+    .collection {
+        height: auto;
+    }
+
+    .addToCart {
+        width: 35px;
+        height: 35px;
+        font-size: 1.5em;
+    }
+
+    .favoris {
+        width: 35px;
+        height: 35px;
+        font-size: 1.5em;
+        left: 35%;
+    }
+
+    .freccia3, .freccia4 {
+        font-size: 3em;
+    }
+    
     /* Formulaire */
 
     #form-login, #form-register {
@@ -935,23 +980,6 @@ canvas.stitch-title {
 
     /* Page Produits */
 
-    .produitBanner {
-        margin-top: 5vh;
-        flex-direction: column-reverse;
-    }
-    .littleBanner {
-        width: 100%;
-    }
-
-    .littleBanner img {
-        width: 70%;
-    }
-
-    .littleBanner p {
-        width: 90%;
-        text-align: justify;
-        font-size: 0.9em;
-    }
 
     .carte {
         min-width: 100%;
@@ -959,40 +987,31 @@ canvas.stitch-title {
     }
 
     .cornice {
-        width: 60%;
+        bottom: 15%;
         height: 40%;
-        bottom: 20%;
     }
 
     .text {
-        font-size: 0.7em;
-        bottom: 33%;
+        bottom: 31%;
     }
 
     .produitImage {
         width: 70%;
     }
 
-    .collection {
-        height: auto;
-    }
-
     .addToCart {
-        font-size: 1em;
-        width: 25px;
-        height: 25px;
+        font-size: 1.5em;
+        width: 35px;
+        height: 35px;
         left: 19%;
     }
 
     .favoris {
-        font-size: 1em;
-        width: 25px;
-        height: 25px;
+        font-size: 1.5em;
+        width: 35px;
+        height: 35px;
     }
-
-    .freccia3, .freccia4 {
-        font-size: 3em;
-    }
+    
 
     /* Details produit */
 
