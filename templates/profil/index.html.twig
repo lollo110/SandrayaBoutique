@@ -13,29 +13,29 @@
 		<h2>Informations personnelles</h2>
 		<ul>
 			<li>
-				<strong>Nom :</strong>
+				<strong>Nom:</strong>
 				{{ user.nom }}
                 </li>
 			<li>
-				<strong>Prénom :</strong>
+				<strong>Prénom:</strong>
 				{{ user.prenom }}</li>
 			<li>
-				<strong>Email :</strong>
+				<strong>Email:</strong>
 				{{ user.email }}</li>
 			<li>
-				<strong>Portable :</strong>
+				<strong>Portable:</strong>
 				{{ user.portable }}</li>
 			<li>
-				<strong>Date d'inscription :</strong>
+				<strong>Date d'inscription:</strong>
 				{{ user.dateInscription|date('d/m/Y') }}</li>
 			<li>
 				<strong>Adresse:</strong>
 				{{ user.addLivraison }}</li>
 			<li>
-				<strong>Ville :</strong>
+				<strong>Ville:</strong>
 				{{ user.ville }}</li>
 			<li>
-				<strong>Code Postal</strong>
+				<strong>Code Postal:</strong>
 				{{ user.codePostal }}</li>
 		</ul>
 
@@ -55,17 +55,17 @@
 			</form>
 		</div>
 	</div>
+    </div>
     
-    
+    <h2 class="titreCommandes"><canvas class="stitch-title" data-text="3OMMANDES"></canvas></h2>
     <div class="commande">
-    <h2>Historique des commandes</h2>
     {% if commandes is empty %}
         <p>Aucune commande passée.</p>
     {% else %}
         <table>
             <thead>
                 <tr>
-                    <th>Numéro de commande</th>
+                    <th>Adresse livraison</th>
                     <th>Date</th>
                     <th>Total</th>
                     <th>Status</th>
@@ -74,7 +74,7 @@
             <tbody>
                 {% for commande in commandes %}
                     <tr>
-                        <td>{{ commande.id }}</td>
+                        <td>{{ commande.addLivraison }}</td>
                         <td>{{ commande.dateCommande|date('d/m/Y') }}</td>
                         <td>{{ commande.total }} €</td>
                         <td>{{ commande.statut.value }}</td>
@@ -84,5 +84,5 @@
         </table>
     {% endif %}
     </div>
-    </div>
+    
 {% endblock %}

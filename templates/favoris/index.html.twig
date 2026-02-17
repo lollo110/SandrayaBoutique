@@ -8,6 +8,7 @@
 </div>
 <h1><canvas class="stitch-title" data-text="5AVORIS"></canvas></h1>
 
+<div class="containerFavori">
 {% if favoris is empty %}
     <p>Vous n'avez aucun favori.</p>
 {% else %}
@@ -17,7 +18,7 @@
                 <th>Image</th>
                 <th>Nom du produit</th>
                 <th>Prix</th>
-                <th>Supprime</th>
+                <th>Supprimer</th>
                 <th>Ajouter au panier</th>
             </tr>
         </thead>
@@ -43,4 +44,5 @@
         </tbody>
     </table>
 {% endif %}
+</div>
 {% endblock %}

@@ -602,7 +602,7 @@ form button:hover {
 
 .profile {
     width: 50%;
-    margin: 0 auto 10% auto;
+    margin: 0 auto;
     background-color: white;
     box-shadow: 1px 1px 10px #e79ebd;
     padding: 10px;
@@ -642,6 +642,32 @@ form button:hover {
 .profile h2 {
     text-align: center;
 }
+
+.titreCommandes {
+    margin: 5% auto;
+}
+
+.commande {
+    width: 50%;
+    margin: auto;
+    background-color: white;
+    box-shadow: 1px 1px 10px #e79ebd;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.commande table{
+    width: 100%;
+}
+
+.commande h2{
+    margin: 20px 0;
+}
+
+.commande table tr {
+    text-align: center;
+}
+
 
 /* CANVAS */
 
@@ -699,6 +725,22 @@ canvas.stitch-title {
     left: 0;
     top: 10px;
 }
+
+/* Page Favoris */
+
+.containerFavori {
+    text-align: center;
+}
+
+.containerFavori table {
+    margin: auto;
+
+    tr, td, th {
+        padding: 20px;
+    }
+}
+
+
 /* Media query portable */
 @media (max-width: 768px) {
     /* Header */
@@ -712,13 +754,40 @@ canvas.stitch-title {
 
     .show {
         width: 30%;
-        top: 10vh;
+        top: 5vh;
     }
 
     /* Footer */
 
     .footer {
         font-size: 0.8em;
+    }
+
+    /* Accueil */
+    .exa {
+        height: auto;
+    }
+    .exa img {
+        width: 95%;
+    }
+
+    /* Page produit */
+
+    .carte {
+        min-width: calc(100% / 2);
+    }
+
+    .littleBanner {
+        width: 100%;
+    }
+
+    .littleBanner img {
+        width: 70%;
+    }
+    /* Formulaire */
+
+    #form-login, #form-register {
+        width: 50%;
     }
 }
 
@@ -776,6 +845,10 @@ canvas.stitch-title {
         width: 30%;
     }
 
+    #close-panier {
+        font-size: 3em;
+    }
+
     /* Footer  */
 
     .footer {
@@ -814,6 +887,8 @@ canvas.stitch-title {
     .footer-little:nth-child(2) {
         margin-top: 50px;
     }
+
+    
 
     /* Page Produits */
 
@@ -859,18 +934,26 @@ canvas.stitch-title {
         height: auto;
     }
 
-    
-
     .addToCart {
         font-size: 1em;
         width: 25px;
         height: 25px;
         left: 19%;
     }
-    
+
     .favoris {
         font-size: 1em;
         width: 25px;
         height: 25px;
+    }
+
+    .freccia3, .freccia4 {
+        font-size: 3em;
+    }
+
+    /* Formulaire */
+
+    #form-login, #form-register {
+        width: 80%;
     }
 }
