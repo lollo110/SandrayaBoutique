@@ -32,15 +32,13 @@
 		<div class="dest">
 			<div class="description">
 				<h2>{{ produit.nomProd }}</h2>
-			</div>
-			<div class="description">
 				<h3>Description détaillée :</h3>
 				<p>{{ produit.description|raw }}</p>
-				<p>{{produit.stock}}</p>
-			</div>
-			<p>Prix unitaire :
-				<span id="prixUnitaire">{{ produit.prix }}</span>
+				<p>Stock : {{produit.stock}}</p>
+			<p id="prixUnitaire">Prix unitaire :
+				<span>{{ produit.prix }}</span>
 				€</p>
+			</div>
 
 			<p class="prix-total-display">
 				Prix Total :
@@ -49,7 +47,7 @@
 			</p>
 
 			<div class="quantite-select">
-				<label for="quantite">Quantité :</label>
+				<label for="quantite">Quantité:</label>
 				<input type="number" id="quantite-produit" name="quantite" value="1" min="1" data-prix="{{ produit.prix }}" max="{{produit.stock}}" data-stock="{{produit.stock}}" style="width: 60px; text-align: center; margin-right: 10px;"/>
 				<button class="addPanier" id="{{produit.id}}">Ajouter au panier</button>
 			</div>
