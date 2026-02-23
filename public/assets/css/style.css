@@ -552,6 +552,17 @@ form button:hover {
     width: 40%;
 }
 
+.exemple {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 5%;
+}
+
+.exemple img{
+    width: 20%;
+}
+
 /* DetailProduit */
 
 .sin img {
@@ -858,6 +869,11 @@ canvas.stitch-title {
         width: 80%;
     }
 
+    .footer-big p {
+        width: 80%;
+        text-align: justify;
+    }
+
     /* Accueil */
     .exa {
         height: auto;
@@ -991,7 +1007,7 @@ canvas.stitch-title {
     }
 
     .titre {
-        margin-top: 12%;
+        margin-top: 16%;
     }
 
     .titre :nth-child(3) {

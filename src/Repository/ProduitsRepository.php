@@ -50,4 +50,19 @@ class ProduitsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+ public function findOneProductPerCategoryWithImages(): array
+{
+
+    $subQb = $this->createQueryBuilder('p1')
+        ->select('MIN(p1.id)')
+        ->groupBy('p1.category');
+
+    return $this->createQueryBuilder('p')
+        ->leftJoin('p.produitsImages', 'pi')
+        ->addSelect('pi')
+        ->where('p.id IN (' . $subQb->getDQL() . ')')
+        ->getQuery()
+        ->getResult();
+}
 }

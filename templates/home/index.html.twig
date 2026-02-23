@@ -4,7 +4,9 @@
 {% endblock %}
 
 {% block body %}
-	<h1><canvas class="stitch-title" data-text="1CCUEIL"></canvas></h1>
+	<h1>
+		<canvas class="stitch-title" data-text="1CCUEIL"></canvas>
+	</h1>
 	<div class="carousel">
 		<div class="contImage">
 			<div class="exa">
@@ -21,5 +23,13 @@
 			</div>
 		</div>
 	</div>
-	
+
+	<h2>
+		Collections
+	</h2>
+	<div class="exemple">
+		{% for produit in produits %}
+			<img src="{{ asset('assets/uploads/' ~ produit.produitsImages|first.image) }}">
+		{% endfor %}
+	</div>
 {% endblock %}
