@@ -99,12 +99,3 @@
 	</div>
 </header>
 
-<div class="flash-message">
-	{% for label, messages in app.flashes %}
-		{% for message in messages %}
-			<div class="alert alert-{{ label }} alert-messages">
-				{{ message }}
-			</div>
-		{% endfor %}
-	{% endfor %}
-</div>
