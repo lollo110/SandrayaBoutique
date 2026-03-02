@@ -76,11 +76,6 @@ setInterval(() => {
 
 // CAROUSEL CARTES ---------------------------------------------
 
-const leftCards = document.querySelector(".freccia3");
-const rightCards = document.querySelector(".freccia4");
-
-let indexCards = 0;
-
 document.querySelectorAll(".collection").forEach(collection => {
     const left = collection.querySelector(".freccia3");
     const right = collection.querySelector(".freccia4");
@@ -90,7 +85,8 @@ document.querySelectorAll(".collection").forEach(collection => {
     if (!left || !right || !container || cards.length === 0) return;
 
     let index = 0;
-    const visibleCards = window.innerWidth < 425 ? 1 : 3;
+    const cardWidth = cards[0].clientWidth;
+    const visibleCards = Math.round(collection.clientWidth / cardWidth);
     const maxIndex = cards.length - visibleCards;
 
     function updateSlide() {

@@ -131,9 +131,9 @@ button:hover {
         transform 1s ease;
 }
 .showPanier {
-    position: fixed;
+    position: absolute;
     right: 0;
-    top: 7vh;
+    top: 100%;
     background-color: #fff;
     box-shadow: -5px 5px 10px #e79ebd;
     padding: 20px;
@@ -558,6 +558,13 @@ form button:hover {
 
 .exemple img{
     width: 20%;
+    border-radius: 20px;
+    transition: transform 1s ease-in-out
+}
+
+.exemple img:hover {
+    box-shadow: 1px 1px 10px #e79ebd;
+    transform: scale(0.9);
 }
 
 /* DetailProduit */
