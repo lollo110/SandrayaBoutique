@@ -802,7 +802,7 @@ canvas.stitch-title {
 /* Media query desktop */
 
 @media (max-with: 1024px) {
-
+    
 }
 
 
@@ -928,15 +928,15 @@ canvas.stitch-title {
     }
 
     .addToCart {
-        width: 35px;
-        height: 35px;
-        font-size: 1.5em;
+        width: 5vw;
+        height: auto;
+        font-size: 1em;
     }
-
+    
     .favoris {
-        width: 35px;
-        height: 35px;
-        font-size: 1.5em;
+        width: 5vw;
+        height: auto;
+        font-size: 1em;
         left: 35%;
     }
 
