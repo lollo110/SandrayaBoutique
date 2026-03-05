@@ -65,4 +65,18 @@ class ProduitsRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
 }
+
+
+public function findOneByIdWithImagesAndAvis(int $id): ?Produits
+{
+    return $this->createQueryBuilder('p')
+        ->leftJoin('p.produitsImages', 'i')
+        ->addSelect('i')
+        ->leftJoin('p.avis', 'a')
+        ->addSelect('a')
+        ->where('p.id = :id')
+        ->setParameter('id', $id)
+        ->getQuery()
+        ->getOneOrNullResult();
+}
 }

@@ -76,27 +76,27 @@ class Avis
 
     }
 
-    public function getIdUser(): ?Users
-    {
-        return $this->user;
-    }
+    // src/Entity/Avis.php
 
-    public function setIdUser(?Users $user): static
-    {
-        $this->user = $user;
+public function getUser(): ?Users
+{
+    return $this->user;
+}
 
-        return $this;
-    }
+public function setUser(?Users $user): static
+{
+    $this->user = $user;
+    return $this;
+}
 
-    public function getIdProduit(): ?Produits
-    {
-        return $this->produit;
-    }
+public function getProduit(): ?Produits
+{
+    return $this->produit;
+}
 
-    public function setIdProduit(?Produits $produit): static
-    {
-        $this->produit = $produit;
-
-        return $this;
-    }
+public function setProduit(?Produits $produit): static
+{
+    $this->produit = $produit;
+    return $this;
+}
 }

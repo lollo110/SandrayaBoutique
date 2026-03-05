@@ -5,9 +5,9 @@
 
 {% block body %}
 
-<div id="cart-message">
-    Produit ajouté au panier !
-</div>
+	<div id="cart-message">
+		Produit ajouté au panier !
+	</div>
 	<div class="contain">
 		<div class="sin">
 
@@ -34,10 +34,11 @@
 				<h2>{{ produit.nomProd }}</h2>
 				<h3>Description détaillée :</h3>
 				<p>{{ produit.description|raw }}</p>
-				<p>Stock : {{produit.stock}}</p>
-			<p id="prixUnitaire">Prix unitaire :
-				<span>{{ produit.prix }}</span>
-				€</p>
+				<p>Stock :
+					{{produit.stock}}</p>
+				<p id="prixUnitaire">Prix unitaire :
+					<span>{{ produit.prix }}</span>
+					€</p>
 			</div>
 
 			<p class="prix-total-display">
@@ -53,5 +54,49 @@
 			</div>
 
 		</div>
+
+
 	</div>
-{% endblock %}
+
+	<div class="avis-section">
+		<h3>Avis clients</h3>
+
+		{% if produit.avis is empty %}
+			<p>Aucun avis pour ce produit.</p>
+		{% else %}
+			{% for avis in produit.avis %}
+				<div class="avis-item">
+					<strong>{{ avis.user.username }}</strong>
+					<p>
+						{% for i in 1..avis.note %}★
+						{% endfor %}
+					</p>
+					<p>{{ avis.commentaire }}</p>
+					<p>{{ avis.dateAvis|date('d/m/Y') }}</p>
+
+					{% if app.user and app.user.id == avis.user.id %}
+						<a href="{{ path('delete_avis', {id: avis.id}) }}">
+							Supprimer mon avis
+						</a>
+					{% endif %}
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+
+	<div class="avis-form">
+		<h3>Laisser un avis</h3>
+
+		{% if app.user %}
+			{{ form_start(avisForm) }}
+			{{ form_row(avisForm.note) }}
+			{{ form_row(avisForm.commentaire) }}
+			<button type="submit">Envoyer</button>
+			{{ form_end(avisForm) }}
+		{% else %}
+			<p>
+				<a href="{{ path('app_login') }}">Connectez-vous</a>
+				pour laisser un avis.
+			</p>
+		{% endif %}
+	{% endblock %}
