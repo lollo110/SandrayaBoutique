@@ -19,8 +19,8 @@ class Commandes
     #[ORM\Column]
     private ?\DateTime $date_commande = null;
 
-    #[ORM\Column]
-    private ?float $total = null;
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+private ?string $total = null;
 
     #[ORM\Column(enumType: Statut::class)]
     private ?Statut $statut = null;
@@ -65,12 +65,12 @@ class Commandes
 
     }
 
-    public function getTotal(): ?float
+    public function getTotal(): ?string
     {
         return $this->total;
     }
 
-    public function setTotal(float $total): static
+    public function setTotal(string $total): static
     {
         $this->total = $total;
 
@@ -101,12 +101,12 @@ class Commandes
         return $this;
     }
 
-    public function getIdUser(): ?Users
+    public function getUser(): ?Users
     {
         return $this->user;
     }
 
-    public function setIdUser(?Users $user): static
+    public function setUser(?Users $user): static
     {
         $this->user = $user;
 

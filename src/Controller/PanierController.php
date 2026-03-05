@@ -171,7 +171,7 @@ public function finaliserCommande(
 
     // 🧾 Création commande
     $commande = new Commandes();
-    $commande->setIdUser($user);
+    $commande->setUser($user);
     $commande->setStatut(Statut::ENATTENTE); // ou EN_ATTENTE
     $commande->setAddLivraison($user->getAddLivraison()); // adapte si besoin
 
@@ -187,7 +187,7 @@ public function finaliserCommande(
         $details->setQuantite($quantite);
         $details->setPrix($produit->getPrix());
 
-        $total += $produit->getPrix() * $quantite;
+        $total += (float) $produit->getPrix() * $quantite;
 
         $em->persist($details);
     }
@@ -199,7 +199,8 @@ $paiement->setStatut(StatutPaiement::ENATTENTE);
 
 $commande->setPaiements($paiement);
 
-    $commande->setTotal($total);
+
+    $commande->setTotal((string)$total);
 
     $em->persist($paiement);
 

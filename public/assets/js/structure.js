@@ -463,8 +463,20 @@ document.querySelectorAll('.favoris').forEach(icon => {
         .then(response => response.json())
         .then(data => {
 
+            if (data.notConnected) {
+                const msg = document.getElementById("favoris-message");
+                msg.classList.add("show");
+                msg.style.display = "block";
+
+                setTimeout(() => {
+                    msg.classList.remove("show");
+                    msg.style.display = "none";
+                }, 3000);
+
+                return;
+            }
+
             if (!data.success) {
-                alert(data.message ?? 'Erreur');
                 return;
             }
 
@@ -479,7 +491,6 @@ document.querySelectorAll('.favoris').forEach(icon => {
             }
 
         })
-        .catch(err => console.error(err));
     });
 
 });
@@ -488,7 +499,7 @@ document.querySelectorAll('.supprimer-favoris').forEach(button => {
     button.addEventListener('click', function() {
         const favoriId = this.id;
 
-        if (!confirm('Voulez-vous vraiment supprimer ce favori ?')) return;
+ 
 
         fetch(`/favoris/supprimer/${favoriId}`, {
             method: 'POST',
@@ -501,15 +512,13 @@ document.querySelectorAll('.supprimer-favoris').forEach(button => {
             if (data.success) {
                 const row = document.getElementById(`favori-${favoriId}`);
                 if (row) row.remove();
-            } else {
-                alert(data.message ?? 'Erreur');
-            }
+            } 
         })
         .catch(err => console.error(err));
     });
 });
 
-// Hamburger manu -----------------------------------------------
+// Hamburger menu -----------------------------------------------
 const hamburger = document.getElementById('hamburger');
 const hamburgerMenu = document.getElementById('hamburger-menu');
 

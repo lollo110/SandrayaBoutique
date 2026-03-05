@@ -21,7 +21,7 @@ final class FavorisController extends AbstractController
         if (!$user) {
             return new JsonResponse([
                 'success' => false,
-                'message' => 'Non connecté'
+                'notConnected' => true,
             ], 401);
         }
 

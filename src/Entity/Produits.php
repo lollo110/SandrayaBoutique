@@ -22,8 +22,8 @@ class Produits
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private ?float $prix = null;
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
+private ?string $prix = null;
 
     #[ORM\Column]
     private ?int $stock = null;
@@ -97,12 +97,12 @@ class Produits
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getPrix(): ?string
     {
         return $this->prix;
     }
 
-    public function setPrix(float $prix): static
+    public function setPrix(string $prix): static
     {
         $this->prix = $prix;
 
@@ -163,7 +163,7 @@ class Produits
     {
         if (!$this->avis->contains($avi)) {
             $this->avis->add($avi);
-            $avi->setIdProduit($this);
+            $avi->setProduit($this);
         }
 
         return $this;
@@ -173,8 +173,8 @@ class Produits
     {
         if ($this->avis->removeElement($avi)) {
             // set the owning side to null (unless already changed)
-            if ($avi->getIdProduit() === $this) {
-                $avi->setIdProduit(null);
+            if ($avi->getProduit() === $this) {
+                $avi->setProduit(null);
             }
         }
 
