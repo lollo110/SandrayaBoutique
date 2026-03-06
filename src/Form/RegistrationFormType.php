@@ -45,20 +45,20 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('username', TextType::class, [
-                'label' => "Username",
+                'label' => "Nom d'utilisateur",
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer un username. ',
+                        'message' => 'Veuillez entrer un nom d\'utilisateur. ',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => "Votre username doit contenir au moins {{ limit }} caractères.",
+                        'minMessage' => "Votre nom d'utilisateur doit contenir au moins {{ limit }} caractères.",
                         'max' => 4096,
                     ]),
                 ]
             ])
             ->add('portable', TelType::class, [
-                'label' => 'Portable',
+                'label' => 'Téléphone',
                 "constraints" => [
                     new NotBlank([
                         'message' => "Veuillez entrer un numero de portable. "
