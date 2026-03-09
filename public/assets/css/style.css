@@ -1015,14 +1015,9 @@ canvas.stitch-title {
 
     .carte {
         min-width: calc(100% / 2);
-        height: 70vh;
+        height: 35vh;
     }
 
-        /* .cornice {
-        width: 60%;
-        height: 60%;
-        bottom: -15%;
-    } */
 
     .cornice-wrapper {
         width: 70%;
@@ -1031,17 +1026,6 @@ canvas.stitch-title {
     .text {
         font-size: 0.8em;
     }
-
-    .collection {
-        height: 70vh;
-    }
-
-    /* .addToCart,
-    .favoris {
-        width: 32px;
-        height: 32px;
-        font-size: 1.2em;
-    } */
 
     .freccia3, .freccia4 {
         font-size: 3em;
