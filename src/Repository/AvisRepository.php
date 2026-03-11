@@ -16,6 +16,16 @@ class AvisRepository extends ServiceEntityRepository
         parent::__construct($registry, Avis::class);
     }
 
+    public function findRandomAvis(int $limit = 3): array
+    {
+        $avis = $this->createQueryBuilder('a')
+            ->getQuery()
+            ->getResult();
+
+        shuffle($avis);
+
+        return array_slice($avis, 0, $limit);
+    }
     //    /**
     //     * @return Avis[] Returns an array of Avis objects
     //     */

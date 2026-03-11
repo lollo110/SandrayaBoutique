@@ -413,7 +413,7 @@ form button:hover {
     right: 0;
 }
 
-/* Carousel Big */
+/* Carousel Big + Accueil */
 
 .carousel {
     display: flex;
@@ -445,6 +445,63 @@ form button:hover {
     font-size: 1.25em;
     margin: 0 10px;
     z-index: 2001;
+}
+
+.exemple {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 5%;
+}
+
+.exemple img{
+    width: 20vw;
+    height: 100%;
+    border-radius: 20px;
+    transition: transform 1s ease-in-out
+}
+
+.exemple img:hover {
+    box-shadow: 1px 1px 10px #e79ebd;
+    transform: scale(0.9);
+}
+
+.avis-container{
+    display:flex;
+    justify-content:center;
+    width: 100%;
+    gap:40px;
+    margin:50px 0;
+    flex-wrap:wrap;
+}
+
+.avis-card{
+    padding:25px;
+    background:white;
+    border-radius: 20px;
+    box-shadow: 1px 1px 20px #e79ebd;
+    text-align:center;
+}
+
+.avis-stars{
+    font-size:22px;
+    color:#f5b301;
+    margin-bottom:10px;
+}
+
+.avis-commentaire{
+    font-style:italic;
+    margin-bottom:15px;
+}
+
+.avis-user{
+    font-weight:bold;
+    font-size:14px;
+}
+
+.avis-date{
+    font-size:12px;
+    opacity:0.6;
 }
 
 /* Page produit */
@@ -611,24 +668,7 @@ form button:hover {
     pointer-events: none;
 }
 
-.exemple {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    gap: 5%;
-}
 
-.exemple img{
-    width: 20vw;
-    height: 100%;
-    border-radius: 20px;
-    transition: transform 1s ease-in-out
-}
-
-.exemple img:hover {
-    box-shadow: 1px 1px 10px #e79ebd;
-    transform: scale(0.9);
-}
 
 /* DetailProduit */
 
@@ -992,6 +1032,8 @@ canvas.stitch-title {
     .exa img {
         width: 95%;
     }
+
+    
 
     /* Page produit */
     

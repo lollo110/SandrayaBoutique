@@ -24,7 +24,7 @@
 		</div>
 	</div>
 
-	<h2>
+	<h2 style="margin: 5% 0">
 		Collections
 	</h2>
 	<div class="exemple">
@@ -32,4 +32,38 @@
 			<a href="{{path('app_produits')}}#{{ produit.category }}"><img src="{{ asset('assets/uploads/' ~ produit.produitsImages|first.image) }}"></a>
 		{% endfor %}
 	</div>
+
+	<h2 style="margin-top:5%">Avis clients</h2>
+
+<div class="avis-container">
+
+    {% for a in avis %}
+        <div class="avis-card">
+
+            <div class="avis-stars">
+                {% for i in 1..5 %}
+                    {% if i <= a.note %}
+                        ★
+                    {% else %}
+                        ☆
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <p class="avis-commentaire">
+                "{{ a.commentaire }}"
+            </p>
+
+            <div class="avis-user">
+                {{ a.user.username }}
+            </div>
+
+            <div class="avis-date">
+                {{ a.dateAvis|date("d/m/Y") }}
+            </div>
+
+        </div>
+    {% endfor %}
+
+</div>
 {% endblock %}
