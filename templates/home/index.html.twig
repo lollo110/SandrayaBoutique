@@ -29,7 +29,7 @@
 	</h2>
 	<div class="exemple">
 		{% for produit in produits %}
-			<img src="{{ asset('assets/uploads/' ~ produit.produitsImages|first.image) }}">
+			<a href="{{path('app_produits')}}#{{ produit.category }}"><img src="{{ asset('assets/uploads/' ~ produit.produitsImages|first.image) }}"></a>
 		{% endfor %}
 	</div>
 {% endblock %}

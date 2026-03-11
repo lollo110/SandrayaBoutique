@@ -619,7 +619,8 @@ form button:hover {
 }
 
 .exemple img{
-    width: 20%;
+    width: 20vw;
+    height: 100%;
     border-radius: 20px;
     transition: transform 1s ease-in-out
 }
