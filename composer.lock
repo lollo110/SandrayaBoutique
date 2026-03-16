@@ -8231,16 +8231,16 @@
         },
         {
             "name": "vich/uploader-bundle",
-            "version": "v2.9.1",
+            "version": "v2.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "945939a04a33c0b78c5fbb7ead31533d85112df5"
+                "reference": "4b88b23cb859a121413df4a831d960a46d6fe27f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/945939a04a33c0b78c5fbb7ead31533d85112df5",
-                "reference": "945939a04a33c0b78c5fbb7ead31533d85112df5",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/4b88b23cb859a121413df4a831d960a46d6fe27f",
+                "reference": "4b88b23cb859a121413df4a831d960a46d6fe27f",
                 "shasum": ""
             },
             "require": {
@@ -8333,9 +8333,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dustin10/VichUploaderBundle/issues",
-                "source": "https://github.com/dustin10/VichUploaderBundle/tree/v2.9.1"
+                "source": "https://github.com/dustin10/VichUploaderBundle/tree/v2.9.2"
             },
-            "time": "2025-12-10T08:23:38+00:00"
+            "time": "2026-03-12T08:18:50+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -9444,16 +9444,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "8.0.3",
+            "version": "8.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "24a711b5c916efc6d6e62aa65aa2ec98fef77f68"
+                "reference": "7b8842c2d8e85d0c3a5831236bf5869af6ab2a11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/24a711b5c916efc6d6e62aa65aa2ec98fef77f68",
-                "reference": "24a711b5c916efc6d6e62aa65aa2ec98fef77f68",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/7b8842c2d8e85d0c3a5831236bf5869af6ab2a11",
+                "reference": "7b8842c2d8e85d0c3a5831236bf5869af6ab2a11",
                 "shasum": ""
             },
             "require": {
@@ -9496,7 +9496,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/environment/issues",
                 "security": "https://github.com/sebastianbergmann/environment/security/policy",
-                "source": "https://github.com/sebastianbergmann/environment/tree/8.0.3"
+                "source": "https://github.com/sebastianbergmann/environment/tree/8.0.4"
             },
             "funding": [
                 {
@@ -9516,7 +9516,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-12T14:11:56+00:00"
+            "time": "2026-03-15T07:05:40+00:00"
         },
         {
             "name": "sebastian/exporter",
