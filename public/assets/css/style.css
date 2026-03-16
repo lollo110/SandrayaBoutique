@@ -1071,11 +1071,12 @@ canvas.stitch-title {
     }
 
     .collection {
-        height: 35vh;
+        height: 100%;
+        padding-bottom: 12%;
     }
 
     .img a {
-        width: 80%;
+        width: 60%;
     }
 
 
