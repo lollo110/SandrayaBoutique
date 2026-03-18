@@ -461,14 +461,14 @@ form button:hover {
 }
 
 .exemple img{
-    width: 20vw;
+    width: 25vw;
     height: 100%;
     border-radius: 20px;
     transition: transform 1s ease-in-out
 }
 
 .exemple img:hover {
-    box-shadow: 1px 1px 10px #e79ebd;
+    box-shadow: 1px 1px 30px #e79ebd;
     transform: scale(0.9);
 }
 
@@ -1043,6 +1043,7 @@ canvas.stitch-title {
     }
 
     
+    
 
     /* Page produit */
     
@@ -1186,9 +1187,20 @@ canvas.stitch-title {
         font-size: 3em;
     }
 
-    /* Footer  */
+    /* Accueil  */
 
-    
+    .exemple {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .exemple a {
+        margin: 20px 0;
+    }
+
+    .exemple img{
+        width: 70vw;
+    }
 
     
 
