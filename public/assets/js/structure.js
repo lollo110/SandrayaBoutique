@@ -543,7 +543,8 @@ document.querySelectorAll('.footer-little h3').forEach(title => {
     });
 });
 
-const head = document.querySelector('.titre');
+
 window.addEventListener("DOMContentLoaded", () => {
-    head.classList.toggle('visible');
+    const head = document.querySelector('.titre');
+    head.classList.add('visible');
 })
