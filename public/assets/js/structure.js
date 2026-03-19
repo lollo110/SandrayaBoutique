@@ -251,7 +251,7 @@ if (plus) {
         button.addEventListener("click", async () => {
             try {
                 await addToCart(button.id, 1);
-                showCartMessage("Produit ajouté au panier !");
+                showMessage("cart-message", "Produit ajouté au panier !");
             } catch (error) {
                 console.error("Erreur lors de l'ajout au panier:", error);
             }
@@ -265,7 +265,7 @@ if (ajoutFavoris) {
         button.addEventListener("click", async () => {
             try {
                 await addToCart(button.id, 1);
-                showCartMessage("Produit ajouté au panier !");
+                showMessage("cart-message", "Produit ajouté au panier !");
             } catch (error) {
                 console.error("Erreur lors de l'ajout au panier:", error);
             }
@@ -358,7 +358,7 @@ if (plusDetails && quantiteInput && prixTotalAffiche) {
             if (prixTotalAffiche) {
                 prixTotalAffiche.textContent = (prixUnitaire).toFixed(2);
             }
-            showCartMessage("Produit ajouté au panier !");
+            showMessage("cart-message", "Produit ajouté au panier !");
         } catch (error) {
             console.error("Erreur lors de l'ajout au panier:", error);
         }
@@ -434,16 +434,26 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 const cartMessage = document.getElementById("cart-message");
 
-function showCartMessage(msg) {
-    if (!cartMessage) return;
-    cartMessage.textContent = msg;
-    cartMessage.classList.add("show");
-    cartMessage.style.display = "block";
+function showMessage(elementId, msg,type = "success", duration = 2000) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+
+    el.textContent = msg;
+    el.classList.remove("msg-success", "msg-error");
+
+     if (type === "success") {
+        el.classList.add("msg-success");
+    } else {
+        el.classList.add("msg-error");
+    }
+
+    el.classList.add("show");
+    el.style.display = "block";
 
     setTimeout(() => {
-        cartMessage.classList.remove("show");
-        cartMessage.style.display = "none";
-    }, 2000);
+        el.classList.remove("show");
+        el.style.display = "none";
+    }, duration);
 }
 
 // FAVORIS -----------------------------------------------
@@ -464,14 +474,7 @@ document.querySelectorAll('.favoris').forEach(icon => {
         .then(data => {
 
             if (data.notConnected) {
-                const msg = document.getElementById("favoris-message");
-                msg.classList.add("show");
-                msg.style.display = "block";
-
-                setTimeout(() => {
-                    msg.classList.remove("show");
-                    msg.style.display = "none";
-                }, 3000);
+                showMessage("favoris-message", "Vous devez être connecté","error", 3000);
 
                 return;
             }
@@ -483,11 +486,15 @@ document.querySelectorAll('.favoris').forEach(icon => {
             if (data.action === 'added') {
                 this.classList.remove('fa-regular');
                 this.classList.add('fa-solid');
+
+                showMessage("favoris-message", "Ajouté aux favoris !", "success");
             }
 
             if (data.action === 'removed') {
                 this.classList.remove('fa-solid');
                 this.classList.add('fa-regular');
+
+                showMessage("favoris-message", "Retiré des favoris !", "error");
             }
 
         })

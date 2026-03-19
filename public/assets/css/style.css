@@ -200,6 +200,7 @@ button:hover {
 .imgPanier {
     width: 50%;
     text-align: center;
+    
 }
 
 #panier-total,
@@ -210,6 +211,7 @@ button:hover {
 
 .imgPanier img {
     width: 100%;
+    border-radius: 20px;
 }
 
 .active {
@@ -545,7 +547,6 @@ form button:hover {
     left: 50%;
     text-align: center;
     transform: translateX(-50%);
-    background: red;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -557,6 +558,13 @@ form button:hover {
     opacity: 1;
 }
 
+.msg-success {
+    background-color: #4caf50;
+}
+
+.msg-error {
+    background-color: red;
+}
 .produitBanner {
     display: flex;
     width: 100%;
@@ -869,6 +877,31 @@ form button:hover {
     text-align: center;
 }
 
+/* Page Panier */
+
+.container-panier {
+    width: 50%;
+    margin: auto;
+}
+.container-panier li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    margin-bottom: 10px;
+}
+.container-panier img {
+    width: 20%;
+    border-radius: 20px;
+}
+
+.text-panier {
+    background-color: white;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+
 
 /* CANVAS */
 
@@ -1079,6 +1112,14 @@ canvas.stitch-title {
         width: 90%;
     }
     
+    /* page panier */
+
+    .container-panier {
+        width: 70%;
+    }
+    .container-panier img {
+        width: 40%;
+    }
 
     /* Favoris */
 
@@ -1271,6 +1312,14 @@ canvas.stitch-title {
 
     .exemple a{
         width: 60vw;
+    }
+
+    /* Page Panier */
+    .container-panier{
+        width: 80%;
+    }
+    .container-panier img {
+        margin-bottom: 10px;
     }
 
     /* Page profile */
