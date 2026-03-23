@@ -121,6 +121,25 @@ button:hover {
     width: 100%;
     top: 0;
     z-index: 2000;
+    display: flex;
+    justify-content: end;
+}
+
+.panierWrapper{
+    position: relative;
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 2px 6px;
+    min-width: 18px;
+    text-align: center;
 }
 
 .show {
@@ -1218,9 +1237,9 @@ canvas.stitch-title {
 
     .addToCart,
 .favoris {
-    width: 35px;
-    height: 35px;
-    font-size: 25px;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
 }
 
 

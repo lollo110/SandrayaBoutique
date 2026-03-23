@@ -7,6 +7,8 @@ let closePanier = document.getElementById("close-panier");
 let show = document.querySelector(".show");
 let showPanier = document.querySelector(".showPanier");
 
+let cartCountElem = document.getElementById("cart-count");
+
 closePanier.addEventListener("click", function (e) {
     showPanier.classList.remove("active2");
 });
@@ -244,6 +246,12 @@ function updateTotal() {
     });
     totalQtyElem.textContent = totalQty;
     totalPriceElem.textContent = totalPrice.toFixed(2);
+
+    if(cartCountElem) {
+        cartCountElem.textContent = totalQty;
+
+        cartCountElem.style.display = totalQty > 0 ? "block" : "none";
+    }
 }
 
 if (plus) {

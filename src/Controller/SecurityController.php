@@ -22,7 +22,6 @@ class SecurityController extends AbstractController
         $cookieDeCode = json_decode($cookie, true);
         $sessionInterface->set('cart', $cookieDeCode);
 
-        // dd($sessionInterface->get('cart', []));
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
