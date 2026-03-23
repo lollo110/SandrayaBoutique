@@ -20,6 +20,17 @@
                             <div class="text">
                                 <h3>{{ produit.nomProd }}</h3>
                                 <p>{{ produit.prix }} €</p>
+                                {% if produit.noteMoyenne %}
+    {% set note = produit.noteMoyenne|round(0, 'floor') %}
+    {% for i in 1..5 %}
+        {% if i <= note %}
+            ★
+        {% else %}
+            ☆
+        {% endif %}
+    {% endfor %}
+    ({{ produit.noteMoyenne }})
+{% endif %}
                             </div>
                             </div>
 

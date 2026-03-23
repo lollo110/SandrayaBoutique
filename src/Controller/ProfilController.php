@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Users;
+use App\Repository\CommandesRepository;
 use App\Repository\UsersRepository;
 use Dom\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,14 +18,14 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 final class ProfilController extends AbstractController
 {
     #[Route('/profil', name: 'app_profil')]
-    public function index(UsersRepository $usersRepository): Response
+    public function index(UsersRepository $usersRepository, CommandesRepository $commandesRepository): Response
     {
         $user = $usersRepository->find($this->getUser());
 
         if (!$user) {
             throw $this->createNotFoundException('Utilisateur non trouvé.');
         }
-        $commandes = $user->getCommandes();
+        $commandes = $commandesRepository->findByUserWithDetails($user);
         
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',

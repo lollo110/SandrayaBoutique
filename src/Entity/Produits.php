@@ -133,7 +133,7 @@ private ?string $prix = null;
     {
         if (!$this->detailsCommandes->contains($detailsCommande)) {
             $this->detailsCommandes->add($detailsCommande);
-            $detailsCommande->setIdProduit($this);
+            $detailsCommande->setProduit($this);
         }
 
         return $this;
@@ -143,8 +143,8 @@ private ?string $prix = null;
     {
         if ($this->detailsCommandes->removeElement($detailsCommande)) {
             // set the owning side to null (unless already changed)
-            if ($detailsCommande->getIdProduit() === $this) {
-                $detailsCommande->setIdProduit(null);
+            if ($detailsCommande->getProduit() === $this) {
+                $detailsCommande->setProduit(null);
             }
         }
 
@@ -252,4 +252,19 @@ private ?string $prix = null;
 
         return $this;
     }
+
+    public function getNoteMoyenne(): ?float
+{
+    if ($this->avis->isEmpty()) {
+        return null;
+    }
+
+    $total = 0;
+
+    foreach ($this->avis as $avis) {
+        $total += $avis->getNote();
+    }
+
+    return round($total / count($this->avis), 1);
+}
 }

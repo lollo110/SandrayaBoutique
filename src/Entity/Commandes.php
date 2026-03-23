@@ -28,14 +28,14 @@ private ?string $total = null;
     #[ORM\Column(length: 255)]
     private ?string $add_livraison = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    #[ORM\ManyToOne(inversedBy: 'commande')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $user = null;
 
     /**
      * @var Collection<int, DetailsCommandes>
      */
-    #[ORM\OneToMany(targetEntity: DetailsCommandes::class, mappedBy: 'commandes')]
+    #[ORM\OneToMany(targetEntity: DetailsCommandes::class, mappedBy: 'commande')]
     private Collection $detailsCommandes;
 
     #[ORM\OneToOne(mappedBy: 'commande', cascade: ['persist', 'remove'])]

@@ -34,8 +34,8 @@ class ProduitsRepository extends ServiceEntityRepository
     public function findAllWithImages(): array
     {
         return $this->createQueryBuilder('p')
-            ->leftJoin('p.produitsImages', 'pi')
-            ->addSelect('pi')
+            ->leftJoin('p.produitsImages', 'pi')->addSelect('pi')
+            ->leftJoin('p.avis', 'a')->addSelect('a')
             ->getQuery()
             ->getResult()
         ;

@@ -558,6 +558,21 @@ document.querySelectorAll('.footer-little h3').forEach(title => {
     });
 });
 
+// Profile Commande Toggle ----------------------------------------
+
+document.querySelectorAll(".toggle-details").forEach(button => {
+    button.addEventListener("click", function () {
+        let id = this.dataset.id;
+
+        document.querySelectorAll(".details-row").forEach(row => {
+            row.style.display = "none";
+        });
+
+        let row = document.getElementById("details-" + id);
+        row.style.display = "table-row";
+    });
+});
+
 
 window.addEventListener("DOMContentLoaded", () => {
     const head = document.querySelector('.titre');

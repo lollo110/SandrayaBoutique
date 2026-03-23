@@ -273,7 +273,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->commandes->contains($commande)) {
             $this->commandes->add($commande);
-            $commande->setIdUser($this);
+            $commande->setUser($this);
         }
 
         return $this;
@@ -283,8 +283,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->commandes->removeElement($commande)) {
             // set the owning side to null (unless already changed)
-            if ($commande->getIdUser() === $this) {
-                $commande->setIdUser(null);
+            if ($commande->getUser() === $this) {
+                $commande->setUser(null);
             }
         }
 
@@ -303,7 +303,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->avis->contains($avi)) {
             $this->avis->add($avi);
-            $avi->setIdUser($this);
+            $avi->setUser($this);
         }
 
         return $this;
@@ -313,8 +313,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->avis->removeElement($avi)) {
             // set the owning side to null (unless already changed)
-            if ($avi->getIdUser() === $this) {
-                $avi->setIdUser(null);
+            if ($avi->getUser() === $this) {
+                $avi->setUser(null);
             }
         }
 

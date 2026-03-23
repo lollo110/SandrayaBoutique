@@ -31,13 +31,14 @@ class CommandesRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Commandes
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findByUserWithDetails($user)
+{
+    return $this->createQueryBuilder('c')
+        ->leftJoin('c.detailsCommandes', 'd')
+        ->addSelect('d')
+        ->where('c.user = :user')
+        ->setParameter('user', $user)
+        ->getQuery()
+        ->getResult();
+}
 }

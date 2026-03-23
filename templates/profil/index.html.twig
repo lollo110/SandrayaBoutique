@@ -4,85 +4,123 @@
 {% endblock %}
 
 {% block body %}
-	<h1><canvas class="stitch-title" data-text="2ROFIL"></canvas></h1>
-
+	<h1>
+		<canvas class="stitch-title" data-text="2ROFIL"></canvas>
+	</h1>
 
 
 	<div class="profile">
-    <div class="info">
-		<h2>Informations personnelles</h2>
-		<ul>
-			<li>
-				<strong>Nom:</strong>
-				{{ user.nom }}
-                </li>
-			<li>
-				<strong>Prénom:</strong>
-				{{ user.prenom }}</li>
-			<li>
-				<strong>Email:</strong>
-				{{ user.email }}</li>
-			<li>
-				<strong>Portable:</strong>
-				{{ user.portable }}</li>
-			<li>
-				<strong>Date d'inscription:</strong>
-				{{ user.dateInscription|date('d/m/Y') }}</li>
-			<li>
-				<strong>Adresse:</strong>
-				{{ user.addLivraison }}</li>
-			<li>
-				<strong>Ville:</strong>
-				{{ user.ville }}</li>
-			<li>
-				<strong>Code Postal:</strong>
-				{{ user.codePostal }}</li>
-		</ul>
+		<div class="info">
+			<h2>Informations personnelles</h2>
+			<ul>
+				<li>
+					<strong>Nom:</strong>
+					{{ user.nom }}
+				</li>
+				<li>
+					<strong>Prénom:</strong>
+					{{ user.prenom }}</li>
+				<li>
+					<strong>Email:</strong>
+					{{ user.email }}</li>
+				<li>
+					<strong>Portable:</strong>
+					{{ user.portable }}</li>
+				<li>
+					<strong>Date d'inscription:</strong>
+					{{ user.dateInscription|date('d/m/Y') }}</li>
+				<li>
+					<strong>Adresse:</strong>
+					{{ user.addLivraison }}</li>
+				<li>
+					<strong>Ville:</strong>
+					{{ user.ville }}</li>
+				<li>
+					<strong>Code Postal:</strong>
+					{{ user.codePostal }}</li>
+			</ul>
 
-		<div class="button">
+			<div class="button">
 
-			<form action="{{ path('app_profil_modif') }}" method="post">
-				<button type="submit">
-					Modifier Profil
-				</button>
-			</form>
+				<form action="{{ path('app_profil_modif') }}" method="post">
+					<button type="submit">
+						Modifier Profil
+					</button>
+				</form>
 
-			<form action="{{ path('profilo_delete') }}" method="post">
-				<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-				<button type="submit" onclick="return confirm('Vous etes sûr de vouloir supprimer votre profil ? Cette action est irréversible.');">
-					Supprimer Profil
-				</button>
-			</form>
+				<form action="{{ path('profilo_delete') }}" method="post">
+					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+					<button type="submit" onclick="return confirm('Vous etes sûr de vouloir supprimer votre profil ? Cette action est irréversible.');">
+						Supprimer Profil
+					</button>
+				</form>
+			</div>
 		</div>
 	</div>
-    </div>
-    
-    <h2 class="titreCommandes"><canvas class="stitch-title" data-text="3OMMANDES"></canvas></h2>
-    <div class="commande">
-    {% if commandes is empty %}
-        <p>Aucune commande passée.</p>
-    {% else %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Adresse livraison</th>
-                    <th>Date</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for commande in commandes %}
-                    <tr>
-                        <td>{{ commande.addLivraison }}</td>
-                        <td>{{ commande.dateCommande|date('d/m/Y') }}</td>
-                        <td>{{ commande.total }} €</td>
-                        <td>{{ commande.statut.value }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endif %}
-    </div>
-    
+
+	<h2 class="titreCommandes">
+		<canvas class="stitch-title" data-text="3OMMANDES"></canvas>
+	</h2>
+	<div class="commande">
+		{% if commandes is empty %}
+			<p>Aucune commande passée.</p>
+		{% else %}
+			<table>
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Total</th>
+						<th>Status</th>
+						<th>Détails</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for commande in commandes %}
+						<tr>
+							<td>{{ commande.dateCommande|date('d/m/Y') }}</td>
+							<td>{{ commande.total }}
+								€</td>
+							<td>{{ commande.statut.value }}</td>
+							<td>
+								<button class="toggle-details" data-id="{{ commande.id }}">
+									Voir détails
+								</button>
+							</td>
+						</tr>
+
+						<tr class="details-row" id="details-{{ commande.id }}">
+							<td colspan="4">
+								<div class="details-content">
+									<p>
+										<strong>Numero Commande:</strong>
+										{{ commande.id }}</p>
+
+									<ul class="liste-produits">
+										{% for detail in commande.detailsCommandes %}
+											<li class="ligne-produit">
+												<span> Commandes ID {{commande.id}}
+												<span class="nom">
+													{{ detail.produit.nomProd }}
+												</span>
+
+												<span class="quantite">
+													x{{ detail.quantite }}
+												</span>
+
+												<span class="prix">
+													{{ detail.prix }}
+													€
+												</span>
+											</li>
+										{% endfor %}
+									</ul>
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}
+	</div>
+
 {% endblock %}
