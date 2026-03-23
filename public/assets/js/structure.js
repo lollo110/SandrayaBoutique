@@ -573,6 +573,19 @@ document.querySelectorAll(".toggle-details").forEach(button => {
     });
 });
 
+// Freccia pour retourner haut
+
+let scrollTopBtn = document.getElementById("scrollTop");
+
+
+// Scroll verso l'alto
+scrollTopBtn.addEventListener("click", function () {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+
 
 window.addEventListener("DOMContentLoaded", () => {
     const head = document.querySelector('.titre');

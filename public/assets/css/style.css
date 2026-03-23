@@ -351,6 +351,23 @@ footer p {
     position: relative;
     z-index: 1;
 }
+
+.scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #000;
+    color: #fff;
+    padding: 12px 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 99999;
+    transition: 0.3s;
+}
+
+.scroll-top:hover {
+    background: #333;
+}
 /* Formulaire registration */
 
 #form-register img {
