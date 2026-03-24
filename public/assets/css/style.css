@@ -368,6 +368,7 @@ footer p {
 .scroll-top:hover {
     background: #ccb089;
     color: white;
+    border: 1px solid white;
 }
 /* Formulaire registration */
 
