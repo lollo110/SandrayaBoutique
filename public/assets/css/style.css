@@ -826,9 +826,13 @@ form button:hover {
 }
 
 .avis-section {
-    width: 50%;
+    width: 60%;
     margin: auto;
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5%;
+    justify-content: center;
 }
 
 .avis-item {
@@ -837,6 +841,7 @@ form button:hover {
     box-shadow: 1px 1px 10px #e79ebd;
     padding: 10px;
     border-radius: 10px;
+    width: 40%;
 }
 
 .avis-form {
@@ -846,15 +851,18 @@ form button:hover {
 }
 
 .avis-form form {
-    width: 30%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-#avis-note {
+#avis_note {
     display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .avis-form button {
@@ -866,7 +874,7 @@ form button:hover {
 }
 
 .avis-form textarea {
-    width: 25vw;
+    width: 40vw;
 }
 /* PAGE PROFIL */
 
@@ -1338,6 +1346,10 @@ canvas.stitch-title {
     .prix-total-display {
         right: 0;
     }
+
+    .avis-section {
+        width: 90%;
+    }
 }
 
 /* Media query portable */
@@ -1464,6 +1476,18 @@ canvas.stitch-title {
     .quantite-select {
         bottom: 0;
         right: 0;
+    }
+
+    .avis-item {
+        width: 60%;
+    }
+
+    #avis_note {
+        flex-direction: column;
+    }
+
+    .avis-form form {
+        width: 90%;
     }
 
     /* Formulaire */
