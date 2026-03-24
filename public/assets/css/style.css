@@ -354,10 +354,10 @@ footer p {
 
 .scroll-top {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #000;
-    color: #fff;
+    bottom: 50px;
+    right: 50px;
+    background: white;
+    color: #ccb089;
     padding: 12px 14px;
     border-radius: 50%;
     cursor: pointer;
@@ -366,7 +366,8 @@ footer p {
 }
 
 .scroll-top:hover {
-    background: #333;
+    background: #ccb089;
+    color: white;
 }
 /* Formulaire registration */
 
