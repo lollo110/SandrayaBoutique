@@ -73,7 +73,7 @@ class DetailsCommandes
         return $this->produit;
     }
 
-    public function setProduit(?Produits $produit): static
+    public function setIdProduit(?Produits $produit): static
     {
         $this->produit = $produit;
 
