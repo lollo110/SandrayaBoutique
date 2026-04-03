@@ -183,7 +183,7 @@ public function finaliserCommande(
 
         $details = new DetailsCommandes();
         $details->setIdCommande($commande);
-        $details->setProduit($produit);
+        $details->setIdProduit($produit);
         $details->setQuantite($quantite);
         $details->setPrix($produit->getPrix());
 
