@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Avis;
 use App\Entity\Produits;
 use App\Entity\ProduitsImages;
+use App\Entity\Users;
 use App\Form\AvisType;
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,14 +29,38 @@ public function index(
         throw $this->createNotFoundException('Produit non trouvé');
     }
 
+    /** @var Users */
+    $user = $this->getUser();
+    $canComment = false;
+
+    // 🔒 Vérification : l'utilisateur a-t-il commandé ce produit ?
+    if ($user) {
+        foreach ($user->getCommandes() as $commande) {
+            foreach ($commande->getDetailsCommandes() as $detail) {
+                if ($detail->getProduit()->getId() === $produit->getId()) {
+                    $canComment = true;
+                    break 2;
+                }
+            }
+        }
+    }
+
     $avis = new Avis();
     $avis->setProduit($produit);
-    $avis->setUser($this->getUser()); // utilisateur connecté
+    $avis->setUser($user);
 
     $form = $this->createForm(AvisType::class, $avis);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
+
+        // 🔒 Sécurité backend (OBLIGATOIRE)
+        if (!$canComment) {
+            throw $this->createAccessDeniedException(
+                'Vous devez acheter ce produit pour laisser un avis.'
+            );
+        }
+
         $em->persist($avis);
         $em->flush();
 
@@ -49,6 +74,7 @@ public function index(
     return $this->render('detail_produit/index.html.twig', [
         'produit' => $produit,
         'avisForm' => $form->createView(),
+        'canComment' => $canComment, // 🔥 important pour Twig
     ]);
 }
 

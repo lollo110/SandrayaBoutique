@@ -58,7 +58,7 @@
 
 	</div>
 
-		<h3>Avis clients</h3>
+	<h3>Avis clients</h3>
 	<div class="avis-section">
 
 		{% if produit.avis is empty %}
@@ -87,12 +87,14 @@
 	<div class="avis-form">
 		<h3>Laisser un avis</h3>
 
-		{% if app.user %}
+		{% if app.user and canComment %}
 			{{ form_start(avisForm) }}
 			{{ form_row(avisForm.note) }}
 			{{ form_row(avisForm.commentaire) }}
 			<button type="submit">Envoyer</button>
 			{{ form_end(avisForm) }}
+		{% elseif app.user %}
+			<p>Vous devez acheter ce produit pour laisser un avis.</p>
 		{% else %}
 			<p>
 				<a href="{{ path('app_login') }}">Connectez-vous</a>
@@ -100,4 +102,4 @@
 			</p>
 		{% endif %}
 	</div>
-	{% endblock %}
+{% endblock %}
