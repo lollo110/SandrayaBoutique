@@ -119,7 +119,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
+        
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -282,7 +282,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeCommande(Commandes $commande): static
     {
         if ($this->commandes->removeElement($commande)) {
-            // set the owning side to null (unless already changed)
             if ($commande->getUser() === $this) {
                 $commande->setUser(null);
             }
@@ -312,7 +311,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeAvi(Avis $avi): static
     {
         if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
             if ($avi->getUser() === $this) {
                 $avi->setUser(null);
             }
@@ -342,7 +340,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeFavori(Favoris $favori): static
     {
         if ($this->favoris->removeElement($favori)) {
-            // set the owning side to null (unless already changed)
+            
             if ($favori->getUser() === $this) {
                 $favori->setUser(null);
             }

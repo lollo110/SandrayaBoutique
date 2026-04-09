@@ -16,14 +16,13 @@ class SecurityController extends AbstractController
     {
 
         $cookie = $request->cookies->get("cartCookie");
-        // get the login error if there is one
+
         $error = $authenticationUtils->getLastAuthenticationError();
         
         $cookieDeCode = json_decode($cookie, true);
         $sessionInterface->set('cart', $cookieDeCode);
 
 
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', [

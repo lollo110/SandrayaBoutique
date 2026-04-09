@@ -134,7 +134,6 @@ private ?string $total = null;
     public function removeDetailsCommande(DetailsCommandes $detailsCommande): static
     {
         if ($this->detailsCommandes->removeElement($detailsCommande)) {
-            // set the owning side to null (unless already changed)
             if ($detailsCommande->getIdCommande() === $this) {
                 $detailsCommande->setIdCommande(null);
             }
@@ -150,7 +149,6 @@ private ?string $total = null;
 
     public function setPaiements(Paiements $paiements): static
     {
-        // set the owning side of the relation if necessary
         if ($paiements->getCommande() !== $this) {
             $paiements->setCommande($this);
         }

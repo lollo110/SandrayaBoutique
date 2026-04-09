@@ -133,7 +133,7 @@ private ?string $prix = null;
     {
         if (!$this->detailsCommandes->contains($detailsCommande)) {
             $this->detailsCommandes->add($detailsCommande);
-            $detailsCommande->setProduit($this);
+            $detailsCommande->setIdProduit($this);
         }
 
         return $this;
@@ -142,9 +142,9 @@ private ?string $prix = null;
     public function removeDetailsCommande(DetailsCommandes $detailsCommande): static
     {
         if ($this->detailsCommandes->removeElement($detailsCommande)) {
-            // set the owning side to null (unless already changed)
+            
             if ($detailsCommande->getProduit() === $this) {
-                $detailsCommande->setProduit(null);
+                $detailsCommande->setIdProduit(null);
             }
         }
 
@@ -172,7 +172,7 @@ private ?string $prix = null;
     public function removeAvi(Avis $avi): static
     {
         if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
+            
             if ($avi->getProduit() === $this) {
                 $avi->setProduit(null);
             }
@@ -202,7 +202,6 @@ private ?string $prix = null;
     public function removeProduitsImage(ProduitsImages $produitsImage): static
     {
         if ($this->produitsImages->removeElement($produitsImage)) {
-            // set the owning side to null (unless already changed)
             if ($produitsImage->getProduit() === $this) {
                 $produitsImage->setProduit(null);
             }
@@ -232,7 +231,6 @@ private ?string $prix = null;
     public function removeFavori(Favoris $favori): static
     {
         if ($this->favoris->removeElement($favori)) {
-            // set the owning side to null (unless already changed)
             if ($favori->getProduit() === $this) {
                 $favori->setProduit(null);
             }

@@ -287,9 +287,8 @@ if (ajoutFavoris) {
 const checkoutBtn = document.getElementById("checkout-btn");
 const clearCartBtn = document.getElementById("clear-cart-btn");
 
-// Rediriger vers la page checkout
 checkoutBtn.addEventListener("click", () => {
-    window.location.href = "/panier"; // Change selon ta route Symfony
+    window.location.href = "/panier";
 });
 
 clearCartBtn.addEventListener("click", async () => {
@@ -353,7 +352,6 @@ if (quantiteInput) {
     });
 }
 
-// Ajouter au panier depuis la page detail_produit
 
 if (plusDetails && quantiteInput && prixTotalAffiche) {
     plusDetails.addEventListener("click", async () => {
@@ -435,7 +433,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const res = await fetch("/panier/get");
     const data = await res.json();
     data.items.forEach(produit => {
-        renderCartItem(produit); // solo render, senza POST
+        renderCartItem(produit); 
     });
     updateTotal();
 });
@@ -573,12 +571,10 @@ document.querySelectorAll(".toggle-details").forEach(button => {
     });
 });
 
-// Freccia pour retourner haut
 
 let scrollTopBtn = document.getElementById("scrollTop");
 
 
-// Scroll verso l'alto
 scrollTopBtn.addEventListener("click", function () {
     window.scrollTo({
         top: 0,

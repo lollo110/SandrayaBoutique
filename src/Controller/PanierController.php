@@ -169,11 +169,10 @@ public function finaliserCommande(
         return $this->redirectToRoute('app_panier');
     }
 
-    // 🧾 Création commande
     $commande = new Commandes();
     $commande->setUser($user);
-    $commande->setStatut(Statut::ENATTENTE); // ou EN_ATTENTE
-    $commande->setAddLivraison($user->getAddLivraison()); // adapte si besoin
+    $commande->setStatut(Statut::ENATTENTE);
+    $commande->setAddLivraison($user->getAddLivraison());
 
     $total = 0;
 
@@ -207,7 +206,6 @@ $commande->setPaiements($paiement);
     $em->persist($commande);
     $em->flush();
 
-    // 🧹 Vider le panier
     $session->remove('cart');
 
     return $this->redirectToRoute('app_panier_success', [

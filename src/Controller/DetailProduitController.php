@@ -33,7 +33,6 @@ public function index(
     $user = $this->getUser();
     $canComment = false;
 
-    // 🔒 Vérification : l'utilisateur a-t-il commandé ce produit ?
     if ($user) {
         foreach ($user->getCommandes() as $commande) {
             foreach ($commande->getDetailsCommandes() as $detail) {
@@ -54,7 +53,6 @@ public function index(
 
     if ($form->isSubmitted() && $form->isValid()) {
 
-        // 🔒 Sécurité backend (OBLIGATOIRE)
         if (!$canComment) {
             throw $this->createAccessDeniedException(
                 'Vous devez acheter ce produit pour laisser un avis.'
@@ -74,7 +72,7 @@ public function index(
     return $this->render('detail_produit/index.html.twig', [
         'produit' => $produit,
         'avisForm' => $form->createView(),
-        'canComment' => $canComment, // 🔥 important pour Twig
+        'canComment' => $canComment, 
     ]);
 }
 
