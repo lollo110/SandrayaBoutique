@@ -783,12 +783,12 @@ form button:hover {
 
 .imgPicco {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 2%;
 }
 
 .imgPicco img {
-    height: 10vh;
+    height: 15vh;
 }
 
 .description {
