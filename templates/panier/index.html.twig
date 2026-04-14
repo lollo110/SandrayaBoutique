@@ -1,40 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PanierController!{% endblock %}
+{% block title %}Hello PanierController!
+{% endblock %}
 
 {% block body %}
-    <h1><canvas class="stitch-title" data-text="2ANIER"></canvas></h1>
+	<h1>
+		<canvas class="stitch-title" data-text="2ANIER"></canvas>
+	</h1>
 
-<div class="container-panier">
-{% if items is empty %}
-    <p>Votre panier est vide.</p>
-{% else %}
-    <ul>
-        {% for item in items %}
-            <li>
-                
-                
-                {% if item.image %}
-                    <img src="/assets/uploads/{{ item.image }}" width="100">
-                {% endif %}
-                <div class="text-panier">
-<strong>{{ item.produit.nomProd }}</strong>
-                
-                <p>Quantité: {{ item.qty }}</p>
-                <p>Total: {{ item.total }} €</p>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
-    <h2>Total panier : {{ total }} €</h2>
-{% endif %}
+	<div class="container-panier">
+		{% if items is empty %}
+			<p>Votre panier est vide.</p>
+		{% else %}
+			<ul>
+				{% for item in items %}
+					<li>
 
-{% if items is not empty %}
-<form action="{{ path('app_panier_finaliser') }}" method="post">
-    <button type="submit">
-        Finaliser la commande
-    </button>
-</form>
-{% endif %}
+
+						{% if item.image %}
+							<img src="/assets/uploads/{{ item.image }}" width="100">
+						{% endif %}
+						<div class="text-panier">
+							<strong>{{ item.produit.nomProd }}</strong>
+
+							<p>Quantité:
+								{{ item.qty }}</p>
+							<p>Total:
+								{{ item.total }}
+								€</p>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<h2>Total panier :
+			{{ total }}
+			€</h2>
+	{% endif %}
+
+	{% if items is not empty %}
+		<form action="{{ path('app_panier_finaliser') }}" method="post">
+			<button type="submit">
+				Finaliser la commande
+			</button>
+		</form>
+	{% endif %}
 {% endblock %}

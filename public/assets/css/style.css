@@ -994,6 +994,15 @@ form button:hover {
     border-radius: 20px;
 }
 
+.success{
+    text-align: center;
+
+}
+
+.success h2 {
+    color: #4caf50;
+}
+
 /* CANVAS */
 
 canvas.stitch-title {
@@ -1086,13 +1095,13 @@ canvas.stitch-title {
 .containerFavori th,
 .containerFavori td {
     padding: 15px;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #ffffff;
     text-align: center;
 }
 
 .containerFavori th {
-    background-color: #000;
-    color: white;
+    background-color: #ffffff;
+    color: #000;
 }
 
 .containerFavori img {
@@ -1230,7 +1239,7 @@ canvas.stitch-title {
 
     .containerFavori tr {
         margin-bottom: 20px;
-        border-top: 2px solid;
+        border-top: 2px solid #ffffff;
         padding: 10px;
     }
 
@@ -1323,7 +1332,7 @@ canvas.stitch-title {
     /* Details Produits */
 
     .contain {
-        flex-direction: column-reverse;
+        flex-direction: column;
         padding-bottom: 20vh;
     }
 

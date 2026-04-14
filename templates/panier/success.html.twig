@@ -2,10 +2,12 @@
 
 
 {% block body %}
+<div class="success">
 <h2>Commande validée</h2>
 
 <p>Numéro de commande : {{ commande.id }}</p>
 <p>Total : {{ commande.total }} €</p>
 <p>Statut : {{ commande.statut.value }}</p>
 
+</div>
 {% endblock %}
