@@ -63,7 +63,7 @@ final class ProfilController extends AbstractController
         ]);
     }   
 
-    #[Route('/profilo/delete', name: 'profilo_delete', methods: ['POST'])]
+    #[Route('/profil/delete', name: 'profil_delete', methods: ['POST'])]
     public function delete(Request $request, EntityManagerInterface $em, UsersRepository $usersRepository): Response
     {
         $user = $usersRepository->find($this->getUser());

@@ -48,7 +48,7 @@
 					</button>
 				</form>
 
-				<form action="{{ path('profilo_delete') }}" method="post">
+				<form action="{{ path('profil_delete') }}" method="post">
 					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
 					<button type="submit" onclick="return confirm('Vous etes sûr de vouloir supprimer votre profil ? Cette action est irréversible.');">
 						Supprimer Profil
@@ -98,23 +98,26 @@
 									<ul class="liste-produits">
 										{% for detail in commande.detailsCommandes %}
 											<li class="ligne-produit">
-												<span> Commandes ID {{commande.id}}
-												<span class="nom">
-													{{ detail.produit.nomProd }}
-												</span>
+												<span>
+													Commandes ID
+													{{commande.id}}
+													<span class="nom">
+														{{ detail.produit.nomProd }}
+													</span>
 
-												<span class="quantite">
-													x{{ detail.quantite }}
-												</span>
+													<span class="quantite">
+														x{{ detail.quantite }}
+													</span>
 
-												<span class="prix">
-													{{ detail.prix }}
-													€
-												</span>
-											</li>
-										{% endfor %}
-									</ul>
-								</div>
+													<span class="prix">
+														{{ detail.prix }}
+														€
+													</span>
+												</li>
+											{% endfor %}
+										</ul>
+									</div>
+								</td>
 							</td>
 						</tr>
 					{% endfor %}
