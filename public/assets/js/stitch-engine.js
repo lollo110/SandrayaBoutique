@@ -43,7 +43,6 @@ class Cucito {
  draw() {
   const s = this.size * STITCH_SCALE;
 
-  // Offset negativo per far sbordare la X verso le celle vicine
   const x1 = this.x - this.size * STITCH_OVERLAP;
   const y1 = this.y - this.size * STITCH_OVERLAP;
 

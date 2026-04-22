@@ -1318,11 +1318,15 @@ canvas.stitch-title {
 
     #form-login img {
         width: 32%;
-        height: 25vh;
+        height: 20vh;
+    }
+
+    #form-register img {
+        height: 20vh;
     }
 
     form {
-        width: 30%;
+        width: 40%;
     }
 
     #form-modif form {
@@ -1504,6 +1508,10 @@ canvas.stitch-title {
     /* Formulaire */
 
     #form-login img {
-        height: 20vh;
+        height: 15vh;
+    }
+
+    #form-register img {
+        height: 15vh;
     }
 }
