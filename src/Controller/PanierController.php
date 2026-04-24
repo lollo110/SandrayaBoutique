@@ -128,6 +128,11 @@ final class PanierController extends AbstractController
     public function getPanier(SessionInterface $session, ProduitsRepository $repo): JsonResponse
     {
         $cart = $session->get('cart', []);
+
+        if (!is_array($cart)) {
+            $session->set('cart', []);
+            $cart = [];
+        }
         $items = [];
 
         foreach ($cart as $id => $qty) {

@@ -449,6 +449,10 @@ form button:hover {
     height: 30vh;
 }
 
+.alert p{
+    color: red;
+}
+
 .row {
     display: flex;
     gap: 20px;
