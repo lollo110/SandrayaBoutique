@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormTypeInterface;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte avec cette adresse e-mail.')]
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -119,7 +119,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        
+
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -154,12 +154,20 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * Ensure the session doesn't contain actual password hashes by CRC32C-hashing them, as supported since Symfony 7.3.
      */
     public function __serialize(): array
-    {
-        $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+{
+    return [
+        'id' => $this->id,
+        'email' => $this->email,
+        'password' => hash('crc32c', $this->password),
+    ];
+}
 
-        return $data;
-    }
+public function __unserialize(array $data): void
+{
+    $this->id = $data['id'] ?? null;
+    $this->email = $data['email'] ?? null;
+    $this->password = $data['password'] ?? null;
+}
 
     #[\Deprecated]
     public function eraseCredentials(): void
@@ -340,7 +348,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeFavori(Favoris $favori): static
     {
         if ($this->favoris->removeElement($favori)) {
-            
+
             if ($favori->getUser() === $this) {
                 $favori->setUser(null);
             }

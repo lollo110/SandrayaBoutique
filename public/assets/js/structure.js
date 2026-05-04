@@ -587,3 +587,26 @@ window.addEventListener("DOMContentLoaded", () => {
     const head = document.querySelector('.titre');
     head.classList.add('visible');
 })
+
+// Modal profil -------------------------------------------------
+
+const modal = document.getElementById('modal');
+const openBtn = document.getElementById('open-modal');
+const closeBtn = document.getElementById('close-modal');
+const confirmBtn = document.getElementById('confirm-delete');
+const form = document.getElementById('delete-form');
+
+if(modal) {
+    openBtn.addEventListener('click', () => {
+    modal.classList.add('active');
+});
+
+closeBtn.addEventListener('click', () => {
+    modal.classList.remove('active');
+});
+
+confirmBtn.addEventListener('click', () => {
+    form.submit();
+});
+}
+

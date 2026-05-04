@@ -48,12 +48,21 @@
 					</button>
 				</form>
 
-				<form action="{{ path('profil_delete') }}" method="post">
+				<form id="delete-form" action="{{ path('profil_delete') }}" method="post">
 					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-					<button type="submit" onclick="return confirm('Vous etes sûr de vouloir supprimer votre profil ? Cette action est irréversible.');">
+					<button type="button" id="open-modal">
 						Supprimer Profil
 					</button>
 				</form>
+
+				<div id="modal" class="modal">
+					<div class="modal-content">
+						<p>Vous êtes sûr de vouloir supprimer votre profil ? Cette action est irréversible.</p>
+
+						<button id="confirm-delete">Oui, supprimer</button>
+						<button id="close-modal">Annuler</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
