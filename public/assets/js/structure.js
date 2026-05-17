@@ -572,7 +572,7 @@ document.querySelectorAll(".toggle-details").forEach(button => {
 });
 
 
-let scrollTopBtn = document.getElementById("scrollTop");
+let scrollTopBtn = document.querySelector(".scroll-top");
 
 
 scrollTopBtn.addEventListener("click", function () {

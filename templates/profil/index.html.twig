@@ -100,16 +100,15 @@
 						<tr class="details-row" id="details-{{ commande.id }}">
 							<td colspan="4">
 								<div class="details-content">
-									<p>
-										<strong>Numero Commande:</strong>
-										{{ commande.id }}</p>
+									
 
 									<ul class="liste-produits">
 										{% for detail in commande.detailsCommandes %}
 											<li class="ligne-produit">
 												<span>
-													Commandes ID
+													Numero de Commande :
 													{{commande.id}}
+												</span>
 													<span class="nom">
 														{{ detail.produit.nomProd }}
 													</span>

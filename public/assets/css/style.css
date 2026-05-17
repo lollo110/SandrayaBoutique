@@ -1129,7 +1129,10 @@ canvas.stitch-title {
 
 .containerFavori th {
     background-color: #ffffff;
-    color: #000;
+}
+
+.containerFavori thead {
+    box-shadow: 1px 1px 10px #e79ebd;
 }
 
 .containerFavori img {
@@ -1213,10 +1216,10 @@ canvas.stitch-title {
 
     /* Accueil */
     .exa {
-        height: auto;
+        height: 60vh;
     }
     .exa img {
-        width: 95%;
+        width: 80%;
     }
 
     .exemple a {
@@ -1394,7 +1397,7 @@ canvas.stitch-title {
 
 /* Media query portable */
 
-@media (max-width: 425px) {
+@media (max-width: 426px) {
     /* Canvas */
     canvas.stitch-title {
         height: 70px;
@@ -1403,6 +1406,7 @@ canvas.stitch-title {
     /* Header */
     .show {
         width: 50%;
+        font-size: 0.9em;
     }
 
     .imgPanier img {
@@ -1442,6 +1446,10 @@ canvas.stitch-title {
     }
 
     /* Accueil  */
+
+    .exa {
+        height: 50vh;
+    }
 
     .exemple a {
         width: 60vw;
