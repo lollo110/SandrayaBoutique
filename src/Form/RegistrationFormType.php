@@ -90,7 +90,7 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'J’accepte les <a href="/terms" target="_blank">Conditions générales</a>',
+                'label' => 'J’accepte les <a href="/assets/uploads/mentions-legales-Sandraya.pdf" target="_blank">Conditions générales</a>',
                 'label_html' => true,
                 'mapped' => false,
                 'constraints' => [
